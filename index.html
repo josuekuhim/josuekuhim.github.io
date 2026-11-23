@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Josué Kuhim — Backend → AI/ML Engineer</title>
-<meta name="description" content="Josué Kuhim — backend & product engineer transitioning into AI/ML Engineering. Bringing production backend experience to ML systems that ship.">
+<title>Josué Kuhim — Senior Software Engineer</title>
+<meta name="description" content="Josué Kuhim — senior software engineer and founder of Nest. 8+ years building production backend systems; recent work on LLM systems (Forja).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Marcellus+SC&family=VT323&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
@@ -95,7 +95,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;
 .bridge p b{font-style:normal;color:#9fe0d2;font-weight:400}
 .menu{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:0;max-width:380px}
 .menu a{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--cream);font-family:"Marcellus SC";font-size:20px;letter-spacing:.12em;padding:5px 14px;position:relative;transition:color .1s}
-@media (max-height:820px) and (min-width:901px){.hero h1{font-size:clamp(56px,8.5vw,112px)}.hero-ui{padding-top:64px}.menu{margin-top:16px}.menu a{padding:2px 14px;font-size:18px}.menu li.alt{margin-top:6px;padding-top:4px}.cls{margin-top:14px}}
+@media (max-height:820px) and (min-width:901px){.hero h1{font-size:clamp(56px,8.5vw,112px)}.hero-ui{padding-top:64px}.menu{margin-top:16px}.menu a{padding:2px 14px;font-size:18px}.menu li.alt{margin-top:6px;padding-top:4px}.cls{margin-top:14px}.menu{display:none}}
 @media (max-height:740px) and (min-width:901px){.hero h1{font-size:clamp(48px,7vw,92px)}.chap{margin-bottom:10px}.tags{display:none}}
 .menu a::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(184,137,59,.35),transparent);transform:scaleX(0);transform-origin:left;transition:transform .2s steps(4)}
 .menu a:hover::before,.menu a:focus-visible::before{transform:none}
@@ -145,6 +145,26 @@ section{position:relative;padding:120px 18px}
 .attr .pips i.on{background:var(--brass);border-color:var(--brass2);box-shadow:0 0 6px rgba(224,184,102,.4)}
 .attr .pips i.on.u{background:var(--verd);border-color:#7cc3b5}
 .attr b{color:var(--brass2);font-weight:400;text-align:right}
+
+/* experience */
+.xp-list{display:grid;gap:16px;max-width:1000px;margin:0 auto}
+.job{display:grid;grid-template-columns:190px 1fr;gap:28px;padding:24px 28px}
+.job.lead{border-color:var(--brass2);box-shadow:0 0 0 1px rgba(224,184,102,.15)}
+.job .when{font-family:VT323;font-size:18px;color:var(--muted);letter-spacing:.08em;line-height:1.3}
+.job .when b{display:block;color:var(--brass2);font-weight:400;font-size:20px}
+.job .when .now{display:block;margin-top:8px;color:var(--phos)}
+.job h3{font-family:"Marcellus SC";font-weight:400;font-size:26px;color:var(--cream);line-height:1.1}
+.job .role{font-family:VT323;font-size:19px;color:#9fe0d2;letter-spacing:.1em;margin:4px 0 10px}
+.job ul{list-style:none}
+.job li{position:relative;padding-left:20px;color:var(--paper);font-size:17px;line-height:1.5;margin:6px 0}
+.job li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;background:var(--brass);transform:rotate(45deg)}
+.job li b{color:var(--phos);font-weight:400}
+.job li strong{color:var(--cream);font-weight:400}
+.job .clients{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.job .clients h4{font-family:VT323;font-size:17px;letter-spacing:.2em;color:var(--brass);font-weight:400;margin-bottom:2px}
+.cls .dot{color:var(--brass);margin:0 6px}
+.hero .cls{font-size:clamp(18px,1.9vw,25px)}
+@media (min-width:901px){.hero .cls{white-space:nowrap}}
 
 /* recruiter path */
 .tnav{display:flex;gap:4px}
@@ -296,6 +316,7 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
   .bridge{grid-template-columns:1fr;gap:6px}
   .portrait{max-width:340px;margin:0 auto}
   .abil{grid-template-columns:1fr 1fr}
+  .job{grid-template-columns:1fr;gap:8px;padding:20px 18px}
   .proj{padding:22px 18px}
   .proj-top{grid-template-columns:1fr;gap:22px}
   .party{grid-template-columns:1fr 1fr}
@@ -323,7 +344,7 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
 
 <header class="top">
   <div class="mark"><i></i>JK · VOL.1</div>
-  <nav class="tnav" aria-label="Sections"><a href="#projects">PROJECTS</a><a href="#dossier">ABOUT</a><a href="#abilities">SKILLS</a><a href="#contact">CONTACT</a></nav>
+  <nav class="tnav" aria-label="Sections"><a href="#dossier">ABOUT</a><a href="#experience">EXPERIENCE</a><a href="#projects">PROJECT</a><a href="#contact">CONTACT</a></nav>
   <div class="r"><a class="gamelink" href="game.html">PLAY THE GAME ↗</a><button id="snd">SOUND: OFF</button><span id="clock">--:--</span></div>
 </header>
 
@@ -332,28 +353,126 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
   <canvas id="scene"></canvas>
   <div class="hero-ui">
     <div class="chap">OPEN TO REMOTE OPPORTUNITIES</div>
-    <h1>Josué<br>Kuhim<span class="new">RESPEC</span></h1>
-    <p class="cls respec"><span class="from">Backend Engineer</span><span class="arrow">→</span><span class="to">AI/ML Engineer</span></p>
-    <p class="tags">Bringing production backend experience — scalable APIs, distributed systems, cloud infrastructure — into AI/ML engineering.</p>
-    <div class="cta-row"><a class="pri" href="#projects">SEE THE PROJECT ▼</a><a href="https://github.com/josuekuhim" target="_blank" rel="noopener">GITHUB ↗</a><a href="#contact">CONTACT</a></div>
+    <h1>Josué<br>Kuhim</h1>
+    <p class="cls">Senior Software Engineer <span class="dot">·</span> Founder of Nest</p>
+    <p class="tags">8+ years building production systems — APIs, distributed workflows, integrations — for fintech, healthcare and ERP. Lately, LLM systems too.</p>
+    <div class="cta-row"><a class="pri" href="#experience">EXPERIENCE ▼</a><a href="#projects">PROJECT ▼</a><a href="https://github.com/josuekuhim" target="_blank" rel="noopener">GITHUB ↗</a></div>
     <ul class="menu">
-      <li><a href="#projects"><span class="cur"></span>Projects<span class="no">01</span></a></li>
-      <li><a href="#dossier"><span class="cur"></span>About<span class="no">02</span></a></li>
-      <li><a href="#abilities"><span class="cur"></span>Skills &amp; Stack<span class="no">03</span></a></li>
-      <li><a href="#skilltree"><span class="cur"></span>Career Path<span class="no">04</span></a></li>
+      <li><a href="#dossier"><span class="cur"></span>About<span class="no">01</span></a></li>
+      <li><a href="#experience"><span class="cur"></span>Experience<span class="no">02</span></a></li>
+      <li><a href="#projects"><span class="cur"></span>Project<span class="no">03</span></a></li>
+      <li><a href="#abilities"><span class="cur"></span>Skills &amp; Stack<span class="no">04</span></a></li>
       <li><a href="#contact"><span class="cur"></span>Contact<span class="no">05</span></a></li>
       <li class="alt"><a href="game.html"><span class="cur"></span>Play the game version<span class="no">~5 MIN ↗</span></a></li>
     </ul>
   </div>
-  <div class="prompts"><span><kbd>SCROLL</kbd>TO THE PROJECT</span></div>
+  <div class="prompts"><span><kbd>SCROLL</kbd>TO CONTINUE</span></div>
   <div class="fps" id="fps">320×240 · 30FPS</div>
+</section>
+
+<section id="dossier">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">01</div><h2>About</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="dossier">
+      <div class="frame portrait rv">
+        <div class="plate">Josué Kuhim</div>
+        <div class="sub">SENIOR SOFTWARE ENGINEER</div>
+      </div>
+      <div class="frame bio rv">
+        <p class="lead">“I build the systems that have to keep working after the demo: the APIs, the workflows, the data, and more and more, the models inside them.”</p>
+        <p>I'm a senior software engineer with 8+ years shipping production systems: REST APIs, complex business workflows, integrations and the infrastructure that keeps them reliable, across fintech, healthcare, ERP and SaaS. Since 2024 I run <strong style="color:var(--brass2);font-weight:400">Nest</strong>, my own engineering company, where I build multi-tenant SaaS products and custom systems for clients.</p>
+        <p style="margin-top:12px">My recent work applies the same production mindset to machine learning. In <a href="#projects" style="color:#9fe0d2">Forja</a> I took a small language model from data to training, evaluation and serving, and measured every step along the way.</p>
+        <div class="stats">
+          <div class="stat"><span>EXPERIENCE</span><span>8+ years</span></div>
+          <div class="stat"><span>CURRENTLY</span><span>Founder · Nest</span></div>
+          <div class="stat"><span>MAIN LANGUAGE</span><span>Python</span></div>
+          <div class="stat"><span>STATUS</span><span class="ok">Open to remote</span></div>
+        </div>
+        <div class="attrs" id="attrs"></div>
+        <p class="ints-line"><span>INTERESTS</span> AI-powered products · distributed systems · financial infrastructure · developer tooling · backend architecture</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">02</div><h2>Experience</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="xp-list">
+      <article class="frame job lead rv">
+        <div class="when"><b>Nov 2024 – Present</b>Brazil · remote<span class="now">● CURRENT</span></div>
+        <div>
+          <h3>Nest</h3>
+          <div class="role">FOUNDER &amp; SENIOR SOFTWARE ENGINEER</div>
+          <ul>
+            <li>Founded and lead a software engineering company building scalable systems, multi-tenant SaaS products and custom enterprise solutions for legal, healthcare and sales operations.</li>
+            <li>Architect and ship backend APIs, complex workflows, data models, automation routines and AI tool integrations that streamline client operations.</li>
+            <li>Own end-to-end delivery, from core backend infrastructure to the web interfaces clients use every day.</li>
+          </ul>
+          <div class="clients">
+            <h4>SELECTED CLIENT ENGAGEMENTS</h4>
+            <ul>
+              <li><strong>BMP Money Plus</strong> (consumer credit): optimized services handling <b>500k+ daily requests</b>, cutting critical response times from <b>~1,200 ms to 300 ms</b>; built credit-approval workflows and moved synchronous services to asynchronous messaging.</li>
+              <li><strong>Incontro Sistemas</strong> (enterprise ERP): built fiscal and financial modules that automate electronic tax-document issuance, integrated with government services.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+      <article class="frame job rv">
+        <div class="when"><b>Mar 2025 – Aug 2025</b>Brazil</div>
+        <div>
+          <h3>Horizon Innovation</h3>
+          <div class="role">SOFTWARE DEVELOPER</div>
+          <ul>
+            <li>Built backend services for a healthcare reporting platform serving <b>50+ medical centers</b>.</li>
+            <li>Refactored and automated critical reporting workflows: from <b>~10 minutes to 20–30 seconds</b>.</li>
+            <li>Built layered REST APIs with standardized contracts, versioning, rate limiting and security controls.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="frame job rv">
+        <div class="when"><b>Jul 2024 – Dec 2024</b>Brazil</div>
+        <div>
+          <h3>Soltech</h3>
+          <div class="role">SOFTWARE ENGINEER</div>
+          <ul>
+            <li>Developed a Python/Django access-control platform integrating real-time workflows with physical hardware (turnstiles, barriers, kiosks).</li>
+            <li>Removed N+1 query bottlenecks in production: <b>P95 latency −30%</b>, <b>5xx errors −40%</b>.</li>
+            <li>Streamlined CI/CD across three squads, cutting release lead time by <b>~25%</b>.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="frame job rv">
+        <div class="when"><b>Sep 2023 – Apr 2024</b>Brazil</div>
+        <div>
+          <h3>W5i Sistemas</h3>
+          <div class="role">SOFTWARE DEVELOPER · GOVERNMENT ERP</div>
+          <ul>
+            <li>Built REST integration layers and data-synchronization automation connecting the modules of a multi-module government ERP.</li>
+            <li>Standardized API documentation, webhooks, structured logging and Docker/GitHub Actions pipelines.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="frame job rv">
+        <div class="when"><b>Oct 2018 – Sep 2023</b>Brazil</div>
+        <div>
+          <h3>JK Software Consulting</h3>
+          <div class="role">INDEPENDENT SOFTWARE CONSULTANT</div>
+          <ul>
+            <li>Delivered end-to-end web applications, APIs and workflow automation for small and mid-sized businesses, owning architecture, backend, frontend, data modeling and production support.</li>
+            <li>Built a construction-management platform with S-curves, histograms and tracking dashboards (Python, Flask, Pandas), with field reports arriving through WhatsApp webhooks.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
 </section>
 
 <section id="projects">
   <div class="wrap">
-    <div class="sh rv"><div class="k">01</div><h2>Projects</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="sh rv"><div class="k">03</div><h2>Project</h2><div class="orn"><i></i><i></i><i></i></div></div>
     <article class="frame proj rv">
-      <div class="hd"><span>FEATURED BUILD</span><span class="done">● SHIPPED · 7 REPOS</span></div>
+      <div class="hd"><span>FEATURED PROJECT · LLM SYSTEMS</span><span class="done">● SHIPPED · 7 REPOS</span></div>
       <div class="proj-top">
         <div>
           <a class="shot" href="https://github.com/josuekuhim/forja-review-demo/pull/1" target="_blank" rel="noopener"><img src="assets/forja-demo.gif" alt="forja-review posting an inline code review on a real GitHub pull request" loading="lazy" width="960" height="600"></a>
@@ -390,50 +509,26 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
   </div>
 </section>
 
-<section id="dossier">
-  <div class="wrap">
-    <div class="sh rv"><div class="k">02</div><h2>About</h2><div class="orn"><i></i><i></i><i></i></div></div>
-    <div class="dossier">
-      <div class="frame portrait rv">
-        <div class="plate">Josué Kuhim</div>
-        <div class="sub">BACKEND → AI/ML ENGINEERING</div>
-      </div>
-      <div class="frame bio rv">
-        <p class="lead">“Most ML never makes it out of the notebook. I come from the side that makes systems run in production.”</p>
-        <p>I'm a backend &amp; product engineer moving into <strong style="color:#9fe0d2;font-weight:400">AI/ML Engineering</strong>. I've been building reliable backend systems and end-to-end products: scalable APIs, system integrations and distributed architectures. Now I'm taking that foundation into machine learning, where models need the same things backends do: solid infrastructure, clean interfaces, and to actually ship.</p>
-        <div class="stats">
-          <div class="stat"><span>FROM</span><span>Backend &amp; Product</span></div>
-          <div class="stat"><span>TO</span><span style="color:#9fe0d2">AI/ML Engineering</span></div>
-          <div class="stat"><span>MAIN WEAPON</span><span>Python</span></div>
-          <div class="stat"><span>STATUS</span><span class="ok">Open to remote</span></div>
-        </div>
-        <div class="attrs" id="attrs"></div>
-        <p class="ints-line"><span>INTERESTS</span> AI-powered products · distributed systems · financial infrastructure · developer tooling · backend architecture</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="abilities">
   <div class="wrap">
-    <div class="sh rv"><div class="k">03</div><h2>Skills &amp; Stack</h2><div class="orn"><i></i><i></i><i></i></div><p class="hintline" style="margin-top:14px">backend skills that carry over to ML engineering</p></div>
+    <div class="sh rv"><div class="k">04</div><h2>Skills &amp; Stack</h2><div class="orn"><i></i><i></i><i></i></div><p class="hintline" style="margin-top:14px">what I use day to day</p></div>
     <div class="abil">
       <div class="frame ab rv" data-k="1">
         <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#e0b866" stroke-width="2.5"><path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14Z"/><path d="M27 12 L17 26 L24 26 L21 37 L31 22 L24 22Z" fill="#e0b866"/></svg></div>
-        <h3>APIs &amp; Backend Services</h3><div class="t">CARRIES OVER TO: MODEL SERVING</div>
-        <p>Scalable, well-shaped APIs with Python, FastAPI and Django: the layer every model needs to reach users.</p></div>
+        <h3>APIs &amp; Backend Services</h3><div class="t">REST · ASYNC · AUTH</div>
+        <p>Versioned, well-shaped APIs with Python, Django, Flask and FastAPI, with the auth, rate limiting and contracts other teams rely on.</p></div>
       <div class="frame ab rv" data-k="2">
         <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#e0b866" stroke-width="2.5"><circle cx="24" cy="9" r="5"/><circle cx="9" cy="37" r="5"/><circle cx="39" cy="37" r="5"/><path d="M21 13 L12 32 M27 13 L36 32 M14 37 L34 37"/><circle cx="24" cy="27" r="3" fill="#e0b866"/></svg></div>
-        <h3>Distributed Systems &amp; Integrations</h3><div class="t">CARRIES OVER TO: ML PIPELINES</div>
-        <p>Distributed architectures, queues and integrations: the same building blocks behind data and inference pipelines.</p></div>
+        <h3>Distributed Systems &amp; Integrations</h3><div class="t">QUEUES · WEBHOOKS · WORKFLOWS</div>
+        <p>Asynchronous processing, third-party and government integrations, and long-running business workflows.</p></div>
       <div class="frame ab rv" data-k="3">
         <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#e0b866" stroke-width="2.5"><path d="M24 6 L42 14 L24 22 L6 14Z"/><path d="M6 24 L24 32 L42 24"/><path d="M6 34 L24 42 L42 34"/></svg></div>
-        <h3>Cloud Infrastructure</h3><div class="t">CARRIES OVER TO: MLOPS</div>
-        <p>AWS, Docker, PostgreSQL and Redis in production: the infrastructure side of deploying and running models.</p></div>
+        <h3>Cloud &amp; Production</h3><div class="t">AWS · DOCKER · CI/CD</div>
+        <p>Containers, GitHub Actions pipelines, monitoring and structured logging: what keeps systems up after launch.</p></div>
       <div class="frame ab ult rv" data-k="4">
         <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#9fe0d2" stroke-width="2.5"><path d="M4 24 Q24 6 44 24 Q24 42 4 24Z"/><circle cx="24" cy="24" r="6" fill="#9fe0d2"/><path d="M24 2 V8 M24 40 V46 M8 8 L12 12 M40 8 L36 12 M8 40 L12 36 M40 40 L36 36"/></svg></div>
-        <h3>AI/ML Engineering</h3><div class="t">FIRST SYSTEM SHIPPED: FORJA</div>
-        <p>LoRA/DPO post-training, eval design and LLM serving, applied in Forja: machine learning that runs in production.</p></div>
+        <h3>ML &amp; LLM Systems</h3><div class="t">APPLIED IN FORJA</div>
+        <p>Training-data pipelines, LoRA/DPO post-training, eval design and LLM serving.</p></div>
     </div>
 
     <div class="inv-wrap">
@@ -452,28 +547,14 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
   </div>
 </section>
 
-<section id="skilltree">
-  <div class="wrap">
-    <div class="sh rv"><div class="k">04</div><h2>Career Path</h2><div class="orn"><i></i><i></i><i></i></div></div>
-    <!-- edit the nodes to match your real progress -->
-    <div class="tree">
-      <div class="node done rv"><div class="gem"><span>1</span></div><div class="st">EXPERIENCE</div><h3>Backend &amp; APIs</h3><p>Python, FastAPI, Django. Scalable APIs and system integrations.</p></div>
-      <div class="node done rv"><div class="gem"><span>2</span></div><div class="st">EXPERIENCE</div><h3>Distributed Systems &amp; Cloud</h3><p>Distributed architectures, PostgreSQL, Redis, AWS, Docker.</p></div>
-      <div class="node now rv"><div class="gem"><span>3</span></div><div class="st">IN PROGRESS</div><h3>AI/ML Engineering</h3><p>Built Forja: data, post-training, evals and serving for a code-review LLM, end to end.</p></div>
-      <div class="node goal rv"><div class="gem"><span>4</span></div><div class="st">GOAL</div><h3>Production AI Systems</h3><p>Where the two meet: ML that ships, scales and stays reliable.</p></div>
-    </div>
-    <div class="frame bridge rv"><span class="q">“</span><p>The hard part of AI in production is often not the model, but everything around it: <b>APIs, data pipelines, infrastructure, reliability</b>. That's the part I already know. Now I'm learning the rest.</p></div>
-  </div>
-</section>
-
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="sh rv"><div class="k">05</div><h2>Contact</h2><div class="orn"><i></i><i></i><i></i></div></div>
-    <p class="big rv">Looking for <em>AI/ML</em> roles, remote.</p>
-    <p class="hintline rv" style="margin:-24px auto 44px;max-width:620px">Open to remote opportunities in AI/ML engineering, and to backend roles that move in that direction.</p>
+    <p class="big rv">Let's build something that <em>ships</em>.</p>
+    <p class="hintline rv" style="margin:-24px auto 44px;max-width:620px">Open to remote roles in senior backend, platform and ML engineering.</p>
     <div class="frame save rv">
       <div class="ttl">GET IN TOUCH</div>
-      <div class="card"><div class="ic"><i></i></div><div><h3>Josué Kuhim</h3><p>BACKEND &amp; PRODUCT ENGINEER → AI/ML ENGINEERING</p><p class="g">● OPEN TO REMOTE ROLES</p></div></div>
+      <div class="card"><div class="ic"><i></i></div><div><h3>Josué Kuhim</h3><p>SENIOR SOFTWARE ENGINEER · FOUNDER OF NEST</p><p class="g">● OPEN TO REMOTE ROLES</p></div></div>
       <div class="opts">
         <a id="mail" href="#"><span class="cur"></span>Send a message<span class="r">✉</span></a>
         <a id="gh" href="#" target="_blank" rel="noopener"><span class="cur"></span>GitHub<span class="r">↗</span></a>
@@ -591,7 +672,7 @@ function heroScene(){
   const bezel = box(1.96, 1.44, .06, L(0x2a2620), 0, .32, .99); rig.add(bezel);  // dark recess around the glass (front at z 1.02)
   const pic = new Image(); let picReady = false;
   pic.onload = () => picReady = true; pic.src = window.AVATAR_SRC || "assets/avatar.jpg";
-  const lines = ["C:\\> RESPEC.EXE", "", "JOSUE KUHIM", "CLASS: BACKEND", "  -> AI/ML ENGINEER", "", "KEEP: PYTHON APIS", "KEEP: DISTRIB SYS", "KEEP: CLOUD INFRA", "", "LEARN: ML ENG", "", "> STUDYING..."];
+  const lines = ["C:\\> WHOAMI.EXE", "", "JOSUE KUHIM", "SENIOR SOFTWARE ENG", "FOUNDER @ NEST", "", "8+ YRS BACKEND", "APIS / WORKFLOWS", "DISTRIB SYSTEMS", "", "LATEST: FORJA", "", "> READY_"];
   let shown = 0, tScr = 0, channel = 0, staticUntil = 0, osdUntil = 3;
   function drawStatic(){
     const img = sx.createImageData(SW, SH), d = img.data;
@@ -706,7 +787,7 @@ function gemScene(){
 if (window.THREE) { safe(heroScene); } else { $("#scene").style.display = "none"; }
 
 /* ---------- attributes ---------- */
-const attrs = [["AI/ML Engineering ↑", 6, 1], ["Backend / APIs", 9], ["Distributed Systems", 8], ["Cloud Infrastructure", 8], ["Product Engineering", 8]];
+const attrs = [["Backend / APIs", 9], ["Distributed Systems", 8], ["Product Engineering", 8], ["Cloud Infrastructure", 8], ["ML & LLM Systems", 6, 1]];
 $("#attrs").innerHTML = attrs.map(([n, v, u]) => `<div class="attr"><span>${n.toUpperCase()}</span><span class="pips">${Array.from({ length: 10 }, (_, i) => `<i data-on="${i < v ? 1 : 0}" class="${u ? "u" : ""}"></i>`).join("")}</span><b>${v}/10</b></div>`).join("");
 
 /* ---------- inventory ---------- */
@@ -748,7 +829,7 @@ $$(".rv").forEach((el, i) => { el.style.animationDelay = (i % 4) * 90 + "ms"; io
   const cmds = {
     help: () => `<span class="b">AVAILABLE COMMANDS</span>
   WHOAMI      who is this
-  RESPEC      the backend -&gt; AI/ML transition
+  XP          work experience
   DIR         list files
   STACK       core technologies
   FORJA       featured project
@@ -757,16 +838,16 @@ $$(".rv").forEach((el, i) => { el.style.animationDelay = (i % 4) * 90 + "ms"; io
   CONTACT     how to reach me
   HIRE        recommended
   CLS         clear screen`,
-    whoami: () => `<span class="a">JOSUE KUHIM</span> — Backend Engineer -&gt; <span class="b">AI/ML Engineer</span>
+    whoami: () => `<span class="a">JOSUE KUHIM</span> — <span class="b">Senior Software Engineer</span>, founder of Nest
 
-Backend &amp; product engineer moving into AI/ML Engineering.
-Built: scalable APIs, system integrations, distributed
-architectures. Now bringing that into ML systems that ship.`,
-    respec: () => `RESPEC IN PROGRESS...
-<span class="d">KEEP</span>   Python, APIs, distributed systems, cloud infra
-<span class="d">KEEP</span>   production mindset: reliability, observability
-<span class="b">LEARN</span>  AI/ML Engineering
-<span class="a">TARGET</span> production AI systems`,
+8+ years shipping production systems: APIs, workflows,
+integrations, distributed architectures. Lately, LLM
+systems too (type FORJA).`,
+    xp: () => `<span class="b">2024-NOW</span>  Nest · founder &amp; senior software engineer
+<span class="d">2025</span>      Horizon Innovation · software developer
+<span class="d">2024</span>      Soltech · software engineer
+<span class="d">2023-24</span>   W5i Sistemas · software developer
+<span class="d">2018-23</span>   JK Software Consulting · consultant`,
     dir: () => ` Volume in drive C is KUHIM
  Directory of C:\\KUHIM
 
@@ -777,7 +858,7 @@ SECRETS  &lt;DIR&gt;              11-18-26
         4 file(s)  640K free`,
     stack: () => items.map((it, i) => `<span class="d">[${String(i + 1).padStart(2, "0")}]</span> ${it[0].padEnd(12)} <span class="d">${it[2]}</span>`).join("\n"),
     interests: () => "* Distributed systems\n* Financial infrastructure\n* Developer tooling\n* AI-powered products\n* Backend architecture",
-    status: () => `* transitioning into AI/ML Engineering\n* <span class="a">open to remote AI/ML &amp; backend roles</span>`,
+    status: () => `* building Nest\n* <span class="a">open to remote senior backend, platform &amp; ML roles</span>`,
     contact: () => `GITHUB    ${esc(CONFIG.github)}\nLINKEDIN  ${esc(CONFIG.linkedin)}` + (CONFIG.email ? `\nEMAIL     ${esc(CONFIG.email)}` : ""),
     hire: () => { setTimeout(() => $("#contact").scrollIntoView({ behavior: "smooth" }), 1100);
       return `Checking candidate.....
@@ -809,7 +890,7 @@ github.com/josuekuhim/forja`,
     else if (e.key === "Tab") { e.preventDefault(); const m = Object.keys(cmds).find(k => k.startsWith(inp.value.toLowerCase())); if (m) inp.value = m.toUpperCase(); }
   });
   $("#screen").addEventListener("click", () => inp.focus({ preventScroll: true }));
-  ["HELP", "WHOAMI", "FORJA", "STACK", "HIRE"].forEach(c => { const b = document.createElement("button"); b.textContent = c; b.onclick = () => run(c); $("#chips").appendChild(b); });
+  ["HELP", "WHOAMI", "XP", "FORJA", "HIRE"].forEach(c => { const b = document.createElement("button"); b.textContent = c; b.onclick = () => run(c); $("#chips").appendChild(b); });
 })();
 
 /* ---------- visits (this browser) ---------- */
