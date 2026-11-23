@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Josué Kuhim — Backend → AI/ML Engineer</title>
+<meta name="description" content="Josué Kuhim — backend & product engineer transitioning into AI/ML Engineering. Bringing production backend experience to ML systems that ship.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Marcellus+SC&family=VT323&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 5 L95 50 L50 95 L5 50Z' fill='%23b8893b'/><path d='M50 25 L75 50 L50 75 L25 50Z' fill='%2314110f'/></svg>">
+<style>
+:root{
+  --bg:#14110f; --bg2:#1c1815; --panel:#211c18;
+  --cream:#e8dcc0; --paper:#d9caa6; --muted:#9a8d74;
+  --brass:#b8893b; --brass2:#e0b866; --blood:#8e2a22; --verd:#4a8c7f; --phos:#7dffa8;
+  --line:rgba(184,137,59,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  background:var(--bg);color:var(--cream);font-family:"IM Fell English",Georgia,serif;font-size:18px;overflow-x:hidden;
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' shape-rendering='crispEdges'%3E%3Cpath d='M1 1h2v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v2h-4v1h1v2h1v2h-2v-1h-1v-2h-1v-1h-1v1h-1v1h-2z' fill='%23e8dcc0' stroke='%2314110f'/%3E%3C/svg%3E") 1 1,auto;
+}
+a,button{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' shape-rendering='crispEdges'%3E%3Cpath d='M1 1h2v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v2h-4v1h1v2h1v2h-2v-1h-1v-2h-1v-1h-1v1h-1v1h-2z' fill='%23e0b866' stroke='%2314110f'/%3E%3C/svg%3E") 1 1,pointer}
+::selection{background:var(--brass);color:var(--bg)}
+
+/* PSX dither + scanlines + vignette */
+body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.4));}
+
+/* boot */
+#boot{position:fixed;inset:0;z-index:10001;background:#000;display:grid;place-items:center;text-align:center;transition:opacity .6s steps(6),visibility .6s}
+#boot.gone{opacity:0;visibility:hidden}
+#boot .sun{width:220px;height:220px;margin:0 auto -150px;background:repeating-conic-gradient(from 0deg,rgba(184,137,59,.5) 0 4deg,transparent 4deg 15deg);border-radius:50%;
+  -webkit-mask:radial-gradient(circle,#000 30%,transparent 70%);mask:radial-gradient(circle,#000 30%,transparent 70%);display:none}
+#boot h1{font-family:Limelight;font-weight:400;font-size:clamp(42px,7vw,72px);color:var(--brass2);letter-spacing:.06em;position:relative}
+#boot p{font-family:VT323;font-size:22px;color:var(--cream);letter-spacing:.3em;margin-top:30px;animation:blink 1s steps(2) infinite}
+#boot small{display:block;margin-top:40px;font-family:VT323;font-size:16px;color:#5b5244;letter-spacing:.15em}
+@keyframes blink{50%{opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* top bar */
+.top{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:10px 18px;font-family:VT323;font-size:18px;letter-spacing:.12em;color:var(--muted);
+  background:linear-gradient(var(--bg),rgba(20,17,15,0));pointer-events:none}
+.top>*{pointer-events:auto}
+.top .mark{display:flex;gap:10px;align-items:center;color:var(--brass2)}
+.top .mark i{width:12px;height:12px;background:var(--brass);transform:rotate(45deg);display:inline-block}
+.top .r{display:flex;gap:16px;align-items:center}
+.top button{font:inherit;letter-spacing:inherit;color:var(--muted);background:none;border:1px solid var(--line);padding:2px 10px}
+.top button.on{color:var(--phos);border-color:var(--phos)}
+.top .gamelink{color:var(--brass2);text-decoration:none;border:1px solid var(--line);padding:2px 10px}
+.top .gamelink:hover{border-color:var(--brass2)}
+.menu li.alt{margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.menu li.alt a{font-size:17px;color:var(--brass2)}
+
+/* hero */
+.hero{position:relative;height:100vh;min-height:620px;overflow:hidden;background:radial-gradient(ellipse at 65% 45%,#2a221b,var(--bg) 70%)}
+#scene{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(20,17,15,.95) 0%,rgba(20,17,15,.75) 34%,transparent 62%)}
+.hero-ui{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px 6vw 90px;max-width:720px}
+.chap{font-family:VT323;font-size:20px;letter-spacing:.3em;color:var(--brass);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.chap::after{content:"";height:1px;width:80px;background:var(--brass)}
+.hero h1{font-family:Limelight;font-weight:400;font-size:clamp(60px,10vw,140px);line-height:.88;color:var(--cream);position:relative;display:inline-block}
+.hero h1 .new{display:none}
+.cls{font-family:"Marcellus SC";font-size:clamp(20px,2.4vw,28px);color:var(--brass2);margin-top:22px;letter-spacing:.06em}
+.tags{font-family:VT323;font-size:21px;color:var(--muted);margin-top:10px;letter-spacing:.04em;max-width:560px;line-height:1.15}
+.respec{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.respec .from{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--blood);text-decoration-thickness:2px}
+.respec .arrow{font-family:VT323;color:var(--brass2)}
+.respec .to{color:#9fe0d2}
+@keyframes nudge{50%{transform:translateX(6px)}}
+
+/* skill tree */
+.tree{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;padding:30px 10px 10px}
+.tree::before{content:"";position:absolute;left:12.5%;right:12.5%;top:76px;height:2px;background:linear-gradient(90deg,var(--brass) 0 42%,var(--verd) 42% 70%,transparent 70%),repeating-linear-gradient(90deg,var(--blood) 0 8px,transparent 8px 14px)}
+.node{text-align:center;padding:0 14px;position:relative}
+.node .gem{width:76px;height:76px;margin:10px auto 26px;transform:rotate(45deg);display:grid;place-items:center;border:2px solid var(--brass);background:#16120f;position:relative;z-index:1}
+.node .gem span{transform:rotate(-45deg);font-family:Limelight;font-size:26px;color:var(--brass2)}
+.node.done .gem{background:radial-gradient(circle,#4a3a22,#1d1712);box-shadow:0 0 20px rgba(224,184,102,.35)}
+.node.now .gem{border-color:#9fe0d2;background:radial-gradient(circle,#24463f,#121c19)}
+.node.now .gem span{color:#9fe0d2}
+.node.goal .gem{border:2px dashed var(--blood);background:#16120f}
+.node.goal .gem span{color:#c95b4f}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(74,140,127,.25),0 0 30px rgba(159,224,210,.45)}}
+.node .st{font-family:VT323;font-size:17px;letter-spacing:.2em;padding:1px 8px;display:inline-block;margin-bottom:8px}
+.node.done .st{background:var(--brass);color:var(--bg)}
+.node.now .st{background:var(--verd);color:var(--bg)}
+.node.goal .st{border:1px solid var(--blood);color:#c95b4f}
+.node h3{font-family:"Marcellus SC";font-weight:400;font-size:22px;color:var(--cream);line-height:1.15}
+.node p{color:var(--muted);font-size:16px;line-height:1.45;margin-top:8px}
+.bridge{margin-top:46px;padding:26px 30px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.bridge .q{font-family:Limelight;font-size:64px;color:var(--brass2);line-height:.6}
+.bridge p{font-size:20px;line-height:1.55;color:var(--paper);font-style:italic}
+.bridge p b{font-style:normal;color:#9fe0d2;font-weight:400}
+.menu{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:0;max-width:380px}
+.menu a{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--cream);font-family:"Marcellus SC";font-size:20px;letter-spacing:.12em;padding:5px 14px;position:relative;transition:color .1s}
+@media (max-height:820px) and (min-width:901px){.hero h1{font-size:clamp(56px,8.5vw,112px)}.hero-ui{padding-top:64px}.menu{margin-top:16px}.menu a{padding:2px 14px;font-size:18px}.menu li.alt{margin-top:6px;padding-top:4px}.cls{margin-top:14px}}
+@media (max-height:740px) and (min-width:901px){.hero h1{font-size:clamp(48px,7vw,92px)}.chap{margin-bottom:10px}.tags{display:none}}
+.menu a::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(184,137,59,.35),transparent);transform:scaleX(0);transform-origin:left;transition:transform .2s steps(4)}
+.menu a:hover::before,.menu a:focus-visible::before{transform:none}
+.menu a:hover,.menu a:focus-visible{color:var(--brass2);outline:none}
+.menu .cur{width:10px;height:10px;background:var(--brass2);transform:rotate(45deg);opacity:0;flex:none}
+.menu a:hover .cur,.menu a:focus-visible .cur{opacity:1}
+.menu .no{margin-left:auto;font-family:VT323;font-size:18px;color:var(--muted)}
+.prompts{position:absolute;z-index:2;left:6vw;right:6vw;bottom:24px;display:flex;gap:26px;flex-wrap:wrap;font-family:VT323;font-size:18px;color:var(--muted);letter-spacing:.1em}
+.prompts kbd{font-family:inherit;color:var(--bg);background:var(--paper);padding:0 6px;margin-right:6px}
+.hero .fps{position:absolute;z-index:2;right:18px;bottom:24px;font-family:VT323;color:#5b5244;font-size:16px}
+
+/* ornaments / sections */
+section{position:relative;padding:120px 18px}
+.wrap{max-width:1160px;margin:0 auto}
+.sh{text-align:center;margin-bottom:60px}
+.sh .k{font-family:VT323;font-size:20px;letter-spacing:.4em;color:var(--brass)}
+.sh h2{font-family:Limelight;font-weight:400;font-size:clamp(44px,7vw,84px);color:var(--cream);line-height:1;margin-top:6px}
+.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px}
+.orn::before,.orn::after{content:"";height:1px;width:min(160px,28vw);background:linear-gradient(90deg,transparent,var(--brass))}
+.orn::after{transform:scaleX(-1)}
+.orn i{width:9px;height:9px;border:1px solid var(--brass2);transform:rotate(45deg)}
+.orn i:nth-child(2){background:var(--brass2)}
+
+.frame{position:relative;background:var(--bg2);border:1px solid var(--line)}
+
+.rv{opacity:0}
+.rv.in{animation:pop .55s steps(6) forwards}
+@keyframes pop{0%{opacity:0;transform:translateY(24px) scale(.97)}100%{opacity:1;transform:none}}
+
+/* dossier */
+.dossier{display:grid;grid-template-columns:330px 1fr;gap:36px;align-items:start}
+.portrait{padding:22px;text-align:center}
+.portrait canvas{width:100%;aspect-ratio:1;image-rendering:pixelated;background:radial-gradient(circle,#2b231c,#120f0d 70%);border:1px solid var(--line)}
+.portrait .plate{margin-top:16px;font-family:"Marcellus SC";font-size:24px;letter-spacing:.08em;color:var(--brass2)}
+.portrait .sub{font-family:VT323;font-size:19px;color:var(--muted);letter-spacing:.12em}
+.bio{padding:30px 32px}
+.bio p{line-height:1.6;color:var(--paper);font-size:19px}
+.bio p.lead{font-size:23px;color:var(--cream);font-style:italic;margin-bottom:16px}
+.stats{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:4px 30px}
+.stat{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px dashed var(--line);font-family:VT323;font-size:20px}
+.stat span:first-child{color:var(--muted);letter-spacing:.12em}
+.stat .ok{color:var(--phos)}
+.attrs{margin-top:28px}
+.attr{display:grid;grid-template-columns:200px 1fr 40px;gap:14px;align-items:center;font-family:VT323;font-size:19px;margin:8px 0;letter-spacing:.06em}
+.attr .pips{display:flex;gap:4px}
+.attr .pips i{flex:1;height:12px;background:#2c251f;border:1px solid #3a3027;transform:skewX(-20deg)}
+.attr .pips i.on{background:var(--brass);border-color:var(--brass2);box-shadow:0 0 6px rgba(224,184,102,.4)}
+.attr .pips i.on.u{background:var(--verd);border-color:#7cc3b5}
+.attr b{color:var(--brass2);font-weight:400;text-align:right}
+
+/* projects */
+.proj{padding:30px 32px 32px}
+.proj .hd{font-family:VT323;font-size:19px;letter-spacing:.25em;color:var(--brass);display:flex;justify-content:space-between;gap:12px;margin-bottom:18px}
+.proj .hd .done{color:var(--phos)}
+.proj-top{display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:start}
+.proj h3{font-family:Limelight;font-weight:400;font-size:clamp(44px,5vw,64px);color:var(--brass2);line-height:1}
+.proj .sub{font-family:"Marcellus SC";font-size:20px;color:#9fe0d2;letter-spacing:.04em;margin:6px 0 14px}
+.proj p{color:var(--paper);line-height:1.55;font-size:17.5px}
+.proj p b{color:var(--cream);font-weight:400}
+.shot{display:block;border:1px solid var(--line);background:#0d1117;line-height:0}
+.shot img{width:100%;height:auto;aspect-ratio:8/5;object-fit:cover}
+.shot-cap{font-family:VT323;font-size:17px;color:var(--muted);letter-spacing:.06em;margin-top:8px}
+.loot{margin-top:18px;display:grid;gap:2px}
+.loot div{display:grid;grid-template-columns:1fr auto;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);font-family:VT323;font-size:20px}
+.loot span:first-child{color:var(--muted);letter-spacing:.08em}
+.loot b{font-weight:400;color:var(--phos);text-align:right}
+.loot s{color:var(--muted);text-decoration-color:var(--blood)}
+.lesson{margin-top:18px;padding:12px 16px;border-left:3px solid var(--verd);background:rgba(74,140,127,.08);font-style:italic;color:var(--paper)}
+.party-h{font-family:VT323;font-size:19px;letter-spacing:.25em;color:var(--brass);margin:34px 0 12px}
+.party{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.party a{display:block;text-decoration:none;padding:12px 14px;border:1px solid #3a3027;background:linear-gradient(145deg,#2a231d,#15110e);transition:.1s}
+.party a:hover,.party a:focus-visible{border-color:var(--brass2);box-shadow:inset 0 0 0 1px var(--brass2);outline:none}
+.party .n{font-family:"Marcellus SC";font-size:18px;color:var(--cream)}
+.party .r{font-family:VT323;font-size:16px;color:var(--brass);letter-spacing:.12em}
+.party p{font-size:15px;line-height:1.4;color:var(--muted);margin-top:4px}
+.party a.wip .r{color:#c95b4f}
+.proj .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.proj .cta a{font-family:VT323;font-size:20px;letter-spacing:.12em;text-decoration:none;color:var(--cream);border:1px solid var(--line);padding:5px 14px}
+.proj .cta a.pri{color:var(--bg);background:var(--brass2);border-color:var(--brass2)}
+.proj .cta a:hover{border-color:var(--brass2);color:var(--brass2)}
+.proj .cta a.pri:hover{color:var(--bg);filter:brightness(1.1)}
+
+/* abilities */
+.abil{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.ab{padding:26px 22px 24px;text-align:center;transition:transform .15s steps(3)}
+.ab:hover{transform:translateY(-6px)}
+.ab .key{position:absolute;top:12px;left:14px;font-family:VT323;font-size:18px;color:var(--bg);background:var(--paper);padding:0 7px}
+.ab .ico{width:84px;height:84px;margin:6px auto 18px;display:grid;place-items:center;border:1px solid var(--brass);transform:rotate(45deg);background:radial-gradient(circle,#3a2e22,#16120f)}
+.ab .ico svg{width:46px;height:46px;transform:rotate(-45deg)}
+.ab h3{font-family:"Marcellus SC";font-size:22px;color:var(--brass2);letter-spacing:.06em;font-weight:400}
+.ab .t{font-family:VT323;font-size:17px;color:var(--muted);letter-spacing:.15em;margin:4px 0 12px}
+.ab p{font-size:16.5px;line-height:1.5;color:var(--paper)}
+.ab.ult{border-color:var(--verd)}
+.ab.ult .ico{border-color:var(--verd)}
+.ab.ult h3{color:#9fe0d2}
+.charge{margin-top:14px;height:8px;background:#2c251f;border:1px solid #3a3027;position:relative;overflow:hidden}
+.charge i{position:absolute;inset:0;width:64%;background:var(--verd)}
+@keyframes chg{from{width:58%}to{width:66%}}
+.ab.cast{animation:cast .6s steps(6)}
+@keyframes cast{0%{box-shadow:inset 0 0 0 5px var(--bg2),inset 0 0 0 6px var(--line),0 0 0 0 rgba(224,184,102,.9)}50%{transform:scale(1.05);box-shadow:inset 0 0 0 5px var(--bg2),inset 0 0 0 6px var(--brass2),0 0 60px 10px rgba(224,184,102,.5)}100%{transform:none}}
+.hintline{text-align:center;margin-top:22px;font-family:VT323;font-size:19px;color:var(--muted);letter-spacing:.12em}
+.hintline kbd{font-family:inherit;color:var(--bg);background:var(--paper);padding:0 6px}
+
+/* inventory */
+.inv-wrap{display:grid;grid-template-columns:1fr 340px;gap:28px;margin-top:70px;align-items:start}
+.inv{padding:24px}
+.inv .hd,.tip .hd{font-family:VT323;font-size:19px;letter-spacing:.25em;color:var(--brass);margin-bottom:16px;display:flex;justify-content:space-between}
+.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.slot{aspect-ratio:1;border:1px solid #3a3027;background:linear-gradient(145deg,#2a231d,#15110e);display:grid;place-items:center;position:relative;font-family:Limelight;font-size:clamp(22px,3vw,34px);color:var(--cream);transition:.1s;outline:none}
+.slot small{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-family:VT323;font-size:14px;color:var(--muted);letter-spacing:.05em;white-space:nowrap;overflow:hidden}
+.slot::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;transform:rotate(45deg);background:var(--c,var(--brass))}
+.slot:hover,.slot:focus-visible,.slot.sel{border-color:var(--brass2);box-shadow:inset 0 0 0 2px var(--brass2),0 0 18px rgba(224,184,102,.3);color:var(--brass2)}
+.tip{padding:24px;min-height:100%}
+.tip h4{font-family:Limelight;font-weight:400;font-size:34px;color:var(--brass2)}
+.tip .cat{font-family:VT323;font-size:18px;letter-spacing:.2em;margin:4px 0 16px}
+.tip p{font-style:italic;color:var(--paper);line-height:1.55}
+.tip .fx{margin-top:16px;font-family:VT323;font-size:19px;color:var(--phos)}
+
+/* objectives */
+.obj{max-width:860px;margin:0 auto;padding:30px 34px}
+.obj .hd{font-family:VT323;font-size:19px;letter-spacing:.25em;color:var(--brass);display:flex;justify-content:space-between;margin-bottom:10px}
+.q{display:grid;grid-template-columns:28px 1fr auto;gap:16px;align-items:start;padding:16px 0;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:0}
+.q .box{width:16px;height:16px;border:1px solid var(--brass2);transform:rotate(45deg);margin-top:8px}
+.q h3{font-family:"Marcellus SC";font-weight:400;font-size:23px;color:var(--cream)}
+.q p{color:var(--muted);font-size:16.5px;margin-top:2px}
+.q .tag{font-family:VT323;font-size:17px;color:var(--brass);letter-spacing:.12em;white-space:nowrap;margin-top:6px}
+.q.side .box{border-color:var(--verd);background:repeating-linear-gradient(45deg,var(--verd) 0 2px,transparent 2px 4px)}
+.q.side h3{color:#9fe0d2}
+.q .prog{margin-top:10px;height:8px;background:#2c251f;border:1px solid #3a3027;max-width:360px}
+.q .prog i{display:block;height:100%;width:0;background:var(--verd);transition:width 1.6s steps(12)}
+
+/* retro PC terminal */
+.pc{max-width:900px;margin:0 auto}
+.bezel{background:linear-gradient(180deg,#d8ccb0,#b9ad90);border-radius:22px 22px 14px 14px;padding:34px 38px 26px;box-shadow:inset 0 2px 0 #f1e8d2,inset 0 -6px 0 #9c9076,0 30px 60px -20px #000}
+.screen{background:#071009;border-radius:18px/26px;padding:22px 24px;box-shadow:inset 0 0 0 4px #1d1a14,inset 0 0 60px rgba(0,0,0,.9),inset 0 0 20px rgba(125,255,168,.12);position:relative;overflow:hidden}
+.screen::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.35) 0 1px,transparent 1px 3px);border-radius:inherit}
+.out{height:360px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;font-family:VT323;font-size:21px;line-height:1.2;color:var(--phos);text-shadow:0 0 6px rgba(125,255,168,.6)}
+.out::-webkit-scrollbar{width:0}
+.inl{display:flex;gap:8px;font-family:VT323;font-size:21px;color:var(--phos);text-shadow:0 0 6px rgba(125,255,168,.6)}
+.inl input{flex:1;background:none;border:0;outline:0;color:#c9ffd9;font:inherit;caret-color:var(--phos)}
+.out .a{color:#e8dcc0}.out .b{color:#e0b866}.out .d{color:#3f8a58}
+.bezel .bot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-family:"Marcellus SC";color:#6e6450;font-size:15px;letter-spacing:.2em}
+.bezel .led{width:10px;height:10px;border-radius:50%;background:#4dff7a;box-shadow:0 0 8px #4dff7a}
+.bezel .vents{display:flex;gap:4px}.bezel .vents i{width:26px;height:4px;background:#9c9076;border-radius:2px}
+.neck{width:34%;height:26px;margin:0 auto;background:linear-gradient(#a99d80,#8f846a)}
+.base{width:56%;height:18px;margin:0 auto;background:linear-gradient(#cfc3a6,#a59a7d);border-radius:6px 6px 10px 10px}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.chips button{font-family:VT323;font-size:19px;letter-spacing:.12em;color:var(--cream);background:none;border:1px solid var(--line);padding:3px 12px}
+.chips button:hover{border-color:var(--brass2);color:var(--brass2)}
+
+/* save dialog */
+.contact{padding-bottom:160px}
+.big{font-family:Limelight;font-size:clamp(40px,7vw,90px);text-align:center;line-height:1;color:var(--cream);margin-bottom:50px}
+.big em{font-family:"IM Fell English";color:var(--brass2)}
+.save{max-width:620px;margin:0 auto;padding:30px}
+.save .ttl{font-family:VT323;font-size:22px;letter-spacing:.3em;color:var(--brass);text-align:center;margin-bottom:20px}
+.card{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:center;padding:16px;border:1px solid var(--brass2);background:rgba(184,137,59,.08)}
+.card .ic{width:64px;height:64px;display:grid;place-items:center;background:#120f0d;border:1px solid var(--line)}
+.card .ic i{width:20px;height:20px;background:var(--brass2);transform:rotate(45deg)}
+.card h3{font-family:"Marcellus SC";font-weight:400;font-size:22px}
+.card p{font-family:VT323;font-size:18px;color:var(--muted);letter-spacing:.08em}
+.card p.g{color:var(--phos)}
+.opts{display:flex;flex-direction:column;gap:2px;margin-top:22px}
+.opts a{display:flex;gap:14px;align-items:center;text-decoration:none;color:var(--cream);font-family:"Marcellus SC";font-size:21px;letter-spacing:.1em;padding:9px 14px;position:relative}
+.opts a::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(184,137,59,.35),transparent);transform:scaleX(0);transform-origin:left;transition:transform .2s steps(4)}
+.opts a:hover::before{transform:none}.opts a:hover{color:var(--brass2)}
+.opts a .cur{width:10px;height:10px;background:var(--brass2);transform:rotate(45deg);opacity:0}
+.opts a:hover .cur{opacity:1}
+.opts a span.r{margin-left:auto;font-family:VT323;font-size:17px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:26px 18px;font-family:VT323;font-size:18px;color:var(--muted);letter-spacing:.08em}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.vc b{color:var(--brass2);font-weight:400}
+
+#toast{position:fixed;left:50%;bottom:26px;z-index:9995;transform:translate(-50%,200%);visibility:hidden;font-family:VT323;font-size:21px;letter-spacing:.12em;color:var(--bg);background:var(--brass2);padding:6px 18px;transition:transform .3s steps(5)}
+#toast.show{transform:translate(-50%,0);visibility:visible}
+
+@media (max-width:900px){
+  .hero::before{background:linear-gradient(0deg,rgba(20,17,15,.96) 30%,rgba(20,17,15,.4) 70%,transparent)}
+  .hero-ui{justify-content:flex-end;padding-bottom:70px}
+  .menu{display:none}
+  .dossier,.inv-wrap{grid-template-columns:1fr}
+  .tree{grid-template-columns:1fr;gap:34px}.tree::before{display:none}
+  .bridge{grid-template-columns:1fr;gap:6px}
+  .portrait{max-width:340px;margin:0 auto}
+  .abil{grid-template-columns:1fr 1fr}
+  .proj{padding:22px 18px}
+  .proj-top{grid-template-columns:1fr;gap:22px}
+  .party{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr}
+  .attr{grid-template-columns:130px 1fr 34px;font-size:17px}
+  .bezel{padding:18px 16px 16px}
+  .prompts{display:none}
+  section{padding:90px 16px}
+}
+@media (max-width:520px){.abil,.party{grid-template-columns:1fr}.slots{grid-template-columns:repeat(4,1fr)}.bio{padding:22px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1}}
+</style>
+</head>
+<body>
+
+<div id="boot" aria-hidden="true">
+  <div>
+    <div class="sun"></div>
+    <h1>KUHIM</h1>
+    <p>PRESS ANY BUTTON</p>
+    <small>MEMORY CARD (SLOT 1) ........ OK</small>
+  </div>
+</div>
+<div id="toast"></div>
+
+<header class="top">
+  <div class="mark"><i></i>JK · VOL.1</div>
+  <div class="r"><a class="gamelink" href="game.html">PLAY THE GAME ↗</a><button id="snd">SOUND: OFF</button><span id="clock">--:--</span></div>
+</header>
+
+<main>
+<section class="hero" id="top">
+  <canvas id="scene"></canvas>
+  <div class="hero-ui">
+    <div class="chap">OPEN TO REMOTE OPPORTUNITIES</div>
+    <h1>Josué<br>Kuhim<span class="new">RESPEC</span></h1>
+    <p class="cls respec"><span class="from">Backend Engineer</span><span class="arrow">→</span><span class="to">AI/ML Engineer</span></p>
+    <p class="tags">Bringing production backend experience — scalable APIs, distributed systems, cloud infrastructure — into AI/ML engineering.</p>
+    <ul class="menu">
+      <li><a href="#dossier"><span class="cur"></span>About<span class="no">01</span></a></li>
+      <li><a href="#skilltree"><span class="cur"></span>Career Path<span class="no">02</span></a></li>
+      <li><a href="#projects"><span class="cur"></span>Projects<span class="no">03</span></a></li>
+      <li><a href="#abilities"><span class="cur"></span>Skills &amp; Stack<span class="no">04</span></a></li>
+      <li><a href="#objectives"><span class="cur"></span>Interests<span class="no">05</span></a></li>
+      <li><a href="#terminal"><span class="cur"></span>Terminal<span class="no">06</span></a></li>
+      <li><a href="#contact"><span class="cur"></span>Contact<span class="no">07</span></a></li>
+      <li class="alt"><a href="game.html"><span class="cur"></span>Play the game version<span class="no">~5 MIN ↗</span></a></li>
+    </ul>
+  </div>
+  <div class="prompts"><span><kbd>SCROLL</kbd>CONTINUE</span><span><kbd>CLICK</kbd>THE SCREEN TO CHANGE CHANNEL</span><span><kbd>DRAG</kbd>ROTATE THE COMPUTER</span></div>
+  <div class="fps" id="fps">320×240 · 30FPS</div>
+</section>
+
+<section id="dossier">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">01</div><h2>About</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="dossier">
+      <div class="frame portrait rv">
+        <div class="plate">Josué Kuhim</div>
+        <div class="sub">BACKEND → AI/ML ENGINEERING</div>
+      </div>
+      <div class="frame bio rv">
+        <p class="lead">“Most ML never makes it out of the notebook. I come from the side that makes systems run in production.”</p>
+        <p>I'm a backend &amp; product engineer moving into <strong style="color:#9fe0d2;font-weight:400">AI/ML Engineering</strong>. I've been building reliable backend systems and end-to-end products: scalable APIs, system integrations and distributed architectures. Now I'm taking that foundation into machine learning, where models need the same things backends do: solid infrastructure, clean interfaces, and to actually ship.</p>
+        <div class="stats">
+          <div class="stat"><span>FROM</span><span>Backend &amp; Product</span></div>
+          <div class="stat"><span>TO</span><span style="color:#9fe0d2">AI/ML Engineering</span></div>
+          <div class="stat"><span>MAIN WEAPON</span><span>Python</span></div>
+          <div class="stat"><span>STATUS</span><span class="ok">Open to remote</span></div>
+        </div>
+        <div class="attrs" id="attrs"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skilltree">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">02</div><h2>Career Path</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <!-- edit the nodes to match your real progress -->
+    <div class="tree">
+      <div class="node done rv"><div class="gem"><span>1</span></div><div class="st">EXPERIENCE</div><h3>Backend &amp; APIs</h3><p>Python, FastAPI, Django. Scalable APIs and system integrations.</p></div>
+      <div class="node done rv"><div class="gem"><span>2</span></div><div class="st">EXPERIENCE</div><h3>Distributed Systems &amp; Cloud</h3><p>Distributed architectures, PostgreSQL, Redis, AWS, Docker.</p></div>
+      <div class="node now rv"><div class="gem"><span>3</span></div><div class="st">IN PROGRESS</div><h3>AI/ML Engineering</h3><p>Built Forja: data, post-training, evals and serving for a code-review LLM, end to end.</p></div>
+      <div class="node goal rv"><div class="gem"><span>4</span></div><div class="st">GOAL</div><h3>Production AI Systems</h3><p>Where the two meet: ML that ships, scales and stays reliable.</p></div>
+    </div>
+    <div class="frame bridge rv"><span class="q">“</span><p>The hard part of AI in production is often not the model, but everything around it: <b>APIs, data pipelines, infrastructure, reliability</b>. That's the part I already know. Now I'm learning the rest.</p></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">03</div><h2>Projects</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <article class="frame proj rv">
+      <div class="hd"><span>FEATURED BUILD</span><span class="done">● SHIPPED · 7 REPOS</span></div>
+      <div class="proj-top">
+        <div>
+          <a class="shot" href="https://github.com/josuekuhim/forja-review-demo/pull/1" target="_blank" rel="noopener"><img src="assets/forja-demo.gif" alt="forja-review posting an inline code review on a real GitHub pull request" loading="lazy" width="960" height="600"></a>
+          <div class="shot-cap">A real run: the post-trained 0.5B, on a laptop CPU, reviews a PR with planted bugs through the GitHub App.</div>
+        </div>
+        <div>
+          <h3>Forja</h3>
+          <div class="sub">A code-review LLM for Portuguese, from training to production</div>
+          <p>A small model (Qwen2.5-Coder 0.5B) trained, evaluated and served for one real task: <b>reviewing pull requests in Portuguese</b>. Mined real bug fixes, post-trained with LoRA, measured everything with one yardstick, served it behind an OpenAI-compatible API and wired it into a GitHub App.</p>
+          <div class="loot">
+            <div><span>REAL BUGS FOUND (OF 199)</span><b><s>9</s> → 27</b></div>
+            <div><span>COMMENT PRECISION</span><b><s>3%</s> → 23%</b></div>
+            <div><span>FORGETTING ON GENERAL EVAL</span><b>NONE</b></div>
+            <div><span>SERVING THROUGHPUT (BATCHING)</span><b>2.6×</b></div>
+          </div>
+          <p class="lesson">Data was the lever, not the method: synthetic training perfected the format but not the bugs. Switching to real fixes moved recall and precision together.</p>
+        </div>
+      </div>
+      <div class="party-h">THE PARTY · ONE REPO PER STAGE</div>
+      <div class="party">
+        <a href="https://github.com/josuekuhim/forja-dados" target="_blank" rel="noopener"><div class="r">DATA</div><div class="n">forja-dados</div><p>12,943 bug-fix commits mined into versioned, contamination-free datasets.</p></a>
+        <a href="https://github.com/josuekuhim/forja-posttrain" target="_blank" rel="noopener"><div class="r">TRAINING</div><div class="n">forja-posttrain</div><p>SFT, LoRA, QLoRA and DPO; ablations on a Kaggle T4.</p></a>
+        <a href="https://github.com/josuekuhim/forja-evals" target="_blank" rel="noopener"><div class="r">EVALS</div><div class="n">forja-evals</div><p>The yardstick: LLM judge, paired bootstrap gate, online evals.</p></a>
+        <a href="https://github.com/josuekuhim/forja-serve" target="_blank" rel="noopener"><div class="r">SERVING</div><div class="n">forja-serve</div><p>Inference engine: continuous batching, int8/int4 with a quality gate.</p></a>
+        <a href="https://github.com/josuekuhim/forja-review" target="_blank" rel="noopener"><div class="r">PRODUCT</div><div class="n">forja-review</div><p>GitHub App: webhook, queue, inline comments, feedback, traces.</p></a>
+        <a href="https://github.com/josuekuhim/forja" target="_blank" rel="noopener"><div class="r">HUB</div><div class="n">forja</div><p>Shared contracts, ADRs and the system-wide results.</p></a>
+        <a class="wip" href="https://github.com/josuekuhim/forja-pretrain" target="_blank" rel="noopener"><div class="r">NEXT</div><div class="n">forja-pretrain</div><p>Transformer from scratch, to become the speculative-decoding draft.</p></a>
+      </div>
+      <div class="cta">
+        <a class="pri" href="https://github.com/josuekuhim/forja" target="_blank" rel="noopener">READ THE WRITE-UP ↗</a>
+        <a href="https://github.com/josuekuhim/forja-review-demo/pull/1" target="_blank" rel="noopener">SEE THE REVIEW ON GITHUB ↗</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="abilities">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">04</div><h2>Skills &amp; Stack</h2><div class="orn"><i></i><i></i><i></i></div><p class="hintline" style="margin-top:14px">backend skills that carry over to ML engineering</p></div>
+    <div class="abil">
+      <div class="frame ab rv" data-k="1">
+        <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#e0b866" stroke-width="2.5"><path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14Z"/><path d="M27 12 L17 26 L24 26 L21 37 L31 22 L24 22Z" fill="#e0b866"/></svg></div>
+        <h3>APIs &amp; Backend Services</h3><div class="t">CARRIES OVER TO: MODEL SERVING</div>
+        <p>Scalable, well-shaped APIs with Python, FastAPI and Django: the layer every model needs to reach users.</p></div>
+      <div class="frame ab rv" data-k="2">
+        <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#e0b866" stroke-width="2.5"><circle cx="24" cy="9" r="5"/><circle cx="9" cy="37" r="5"/><circle cx="39" cy="37" r="5"/><path d="M21 13 L12 32 M27 13 L36 32 M14 37 L34 37"/><circle cx="24" cy="27" r="3" fill="#e0b866"/></svg></div>
+        <h3>Distributed Systems &amp; Integrations</h3><div class="t">CARRIES OVER TO: ML PIPELINES</div>
+        <p>Distributed architectures, queues and integrations: the same building blocks behind data and inference pipelines.</p></div>
+      <div class="frame ab rv" data-k="3">
+        <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#e0b866" stroke-width="2.5"><path d="M24 6 L42 14 L24 22 L6 14Z"/><path d="M6 24 L24 32 L42 24"/><path d="M6 34 L24 42 L42 34"/></svg></div>
+        <h3>Cloud Infrastructure</h3><div class="t">CARRIES OVER TO: MLOPS</div>
+        <p>AWS, Docker, PostgreSQL and Redis in production: the infrastructure side of deploying and running models.</p></div>
+      <div class="frame ab ult rv" data-k="4">
+        <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#9fe0d2" stroke-width="2.5"><path d="M4 24 Q24 6 44 24 Q24 42 4 24Z"/><circle cx="24" cy="24" r="6" fill="#9fe0d2"/><path d="M24 2 V8 M24 40 V46 M8 8 L12 12 M40 8 L36 12 M8 40 L12 36 M40 40 L36 36"/></svg></div>
+        <h3>AI/ML Engineering</h3><div class="t">FIRST SYSTEM SHIPPED: FORJA</div>
+        <p>LoRA/DPO post-training, eval design and LLM serving, applied in Forja: machine learning that runs in production.</p></div>
+    </div>
+
+    <div class="inv-wrap">
+      <div class="frame inv rv">
+        <div class="hd"><span>CORE TECHNOLOGIES</span><span>10</span></div>
+        <div class="slots" id="slots"></div>
+      </div>
+      <div class="frame tip rv" id="tip">
+        <div class="hd"><span>DETAILS</span><span id="tipn">01</span></div>
+        <h4 id="tiph">Python</h4>
+        <div class="cat" id="tipc">CORE</div>
+        <p id="tipp"></p>
+        <div class="fx" id="tipf"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="objectives">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">05</div><h2>Interests</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="frame obj rv">
+      <div class="hd"><span>CURRENT GOAL</span><span>IN PROGRESS</span></div>
+      <div class="q side"><span class="box"></span><div><h3>Become an AI/ML Engineer</h3><p>Combine the backend foundation with machine learning to build AI systems that work in production.</p></div><span class="tag">GOAL</span></div>
+      <div class="hd" style="margin-top:26px"><span>WHERE I WANT TO APPLY IT</span><span>INTERESTS</span></div>
+      <div class="q"><span class="box"></span><div><h3>AI-Powered Products</h3><p>Models inside software people actually use.</p></div><span class="tag">AI/ML</span></div>
+      <div class="q"><span class="box"></span><div><h3>Distributed Systems</h3><p>Make many machines (and many models) behave like one reliable system.</p></div><span class="tag">CORE</span></div>
+      <div class="q"><span class="box"></span><div><h3>Financial Infrastructure</h3><p>Systems where correctness is non-negotiable, and a natural home for ML.</p></div><span class="tag">DOMAIN</span></div>
+      <div class="q"><span class="box"></span><div><h3>Developer Tooling</h3><p>Tools that remove friction, increasingly powered by AI.</p></div><span class="tag">DOMAIN</span></div>
+      <div class="q"><span class="box"></span><div><h3>Backend Architecture</h3><p>Systems that stay clean as traffic, product and models grow.</p></div><span class="tag">CORE</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="terminal">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">06</div><h2>Terminal</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="pc rv">
+      <div class="bezel">
+        <div class="screen" id="screen">
+          <div class="out" id="out"></div>
+          <div class="inl"><span>C:\KUHIM&gt;</span><input id="cmd" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>
+        </div>
+        <div class="bot"><span>KUHIM · 486DX</span><span class="vents"><i></i><i></i><i></i><i></i></span><span class="led"></span></div>
+      </div>
+      <div class="neck"></div><div class="base"></div>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">07</div><h2>Contact</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <p class="big rv">Looking for <em>AI/ML</em> roles, remote.</p>
+    <p class="hintline rv" style="margin:-24px auto 44px;max-width:620px">Open to remote opportunities in AI/ML engineering, and to backend roles that move in that direction.</p>
+    <div class="frame save rv">
+      <div class="ttl">GET IN TOUCH</div>
+      <div class="card"><div class="ic"><i></i></div><div><h3>Josué Kuhim</h3><p>BACKEND &amp; PRODUCT ENGINEER → AI/ML ENGINEERING</p><p class="g">● OPEN TO REMOTE ROLES</p></div></div>
+      <div class="opts">
+        <a id="mail" href="#"><span class="cur"></span>Send a message<span class="r">✉</span></a>
+        <a id="gh" href="#" target="_blank" rel="noopener"><span class="cur"></span>GitHub<span class="r">↗</span></a>
+        <a id="li" href="#" target="_blank" rel="noopener"><span class="cur"></span>LinkedIn<span class="r">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Josué Kuhim · rendered at 320×240</span>
+    <span class="vc">VISITS: <b id="vc">01</b></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/avatar-data.js"></script>
+<script>
+/* ====== edit your links here ====== */
+const CONFIG = {
+  email:    "",                                       // TODO: your email
+  github:   "https://github.com/josuekuhim",          // TODO: confirm
+  linkedin: "https://www.linkedin.com/in/josuekuhim"  // TODO: confirm
+};
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const safe = f => { try { return f(); } catch { return null; } };
+
+$("#gh").href = CONFIG.github; $("#li").href = CONFIG.linkedin;
+$("#mail").href = CONFIG.email ? "mailto:" + CONFIG.email : CONFIG.linkedin;
+$("#yr").textContent = new Date().getFullYear();
+let tt; const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("show"), 2000); };
+const tick = () => $("#clock").textContent = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }); tick(); setInterval(tick, 10000);
+
+/* ---------- sound (opt-in UI blips) ---------- */
+let actx = null, snd = false;
+$("#snd").onclick = () => { snd = !snd; $("#snd").textContent = "SOUND: " + (snd ? "ON" : "OFF"); $("#snd").classList.toggle("on", snd);
+  if (snd && !actx) actx = safe(() => new (window.AudioContext || window.webkitAudioContext)()); blip(660, .08); };
+function blip(f = 880, d = .04, type = "square"){
+  if (!snd || !actx) return; const t = actx.currentTime, o = actx.createOscillator(), g = actx.createGain();
+  o.type = type; o.frequency.setValueAtTime(f, t); g.gain.setValueAtTime(.035, t); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+  o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t + d);
+}
+document.addEventListener("pointerover", e => { if (e.target.closest(".menu a,.opts a,.slot,.chips button")) blip(990, .03); });
+
+/* ---------- boot ---------- */
+(function(){
+  const el = $("#boot"); const done = () => { if (el.classList.contains("gone")) return; el.classList.add("gone"); blip(523, .12, "triangle"); safe(() => sessionStorage.setItem("boot", 1)); };
+  if (reduced || safe(() => sessionStorage.getItem("boot"))) { el.classList.add("gone"); return; }
+  setTimeout(done, 2400); addEventListener("keydown", done, { once: true }); el.addEventListener("pointerdown", done);
+})();
+
+/* ---------- PSX 3D hero ---------- */
+const PIX = 3;   // render scale: bigger = chunkier pixels
+let mx = 0, my = 0, drag = 0, dragX = 0;
+addEventListener("pointermove", e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; });
+
+function psx(mat, snap){ mat.onBeforeCompile = s => { s.uniforms.uSnap = snap;
+  s.vertexShader = "uniform float uSnap;\n" + s.vertexShader.replace("#include <project_vertex>",
+    "#include <project_vertex>\n gl_Position.xy = floor(gl_Position.xy / gl_Position.w * uSnap) / uSnap * gl_Position.w;"); }; return mat; }
+
+function heroScene(){
+  const cv = $("#scene");
+  const R = new THREE.WebGLRenderer({ canvas: cv, antialias: false }); R.setPixelRatio(1);
+  const BG = 0x14110f, scene = new THREE.Scene(); scene.background = new THREE.Color(BG); scene.fog = new THREE.Fog(BG, 9, 19);
+  const cam = new THREE.PerspectiveCamera(42, 1, .1, 60);
+  const snap = { value: 120 };
+  const L = c => psx(new THREE.MeshLambertMaterial({ color: c }), snap);
+  const P = (c, e = 0) => psx(new THREE.MeshPhongMaterial({ color: c, flatShading: true, shininess: 60, specular: 0x886633, emissive: e }), snap);
+  const box = (w, h, d, m, x, y, z) => { const o = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); o.position.set(x, y, z); return o; };
+
+  const world = new THREE.Group(); scene.add(world);
+  const rig = new THREE.Group(); world.add(rig);
+
+  // desk
+  rig.add(box(6, .22, 3, L(0x3b2a20), 0, -1.1, .3));
+  for (const x of [-2.7, 2.7]) for (const z of [-1, 1.6]) rig.add(box(.18, 2.2, .18, L(0x2a1d16), x, -2.3, z));
+
+  // CRT
+  const beige = L(0xcfc4a8), beige2 = L(0xb3a88c);
+  rig.add(box(2.3, 1.9, 1.9, beige, 0, .25, 0));
+  const back = new THREE.Mesh(new THREE.CylinderGeometry(.75, 1.15, 1.3, 4, 1), beige2); back.rotation.set(Math.PI / 2, Math.PI / 4, 0); back.position.set(0, .25, -1.5); rig.add(back);
+  rig.add(box(1.3, .16, 1.2, beige2, 0, -.78, 0));
+  rig.add(box(.9, .14, .1, L(0x6e6450), .55, -.5, .96));          // floppy slot strip
+  const led = box(.07, .07, .05, new THREE.MeshBasicMaterial({ color: 0x4dff7a }), -.85, -.5, .97); rig.add(led);
+
+  // screen: channel 1 = avatar picture, channel 2 = terminal. Click the screen to switch.
+  const SW = 160, SH = 120;
+  const sc = document.createElement("canvas"); sc.width = SW; sc.height = SH; const sx = sc.getContext("2d");
+  const tex = new THREE.CanvasTexture(sc); tex.magFilter = THREE.NearestFilter; tex.minFilter = THREE.NearestFilter;
+  // the screen floats a little in front of the monitor face; polygonOffset keeps it on top even with PSX vertex snapping
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 1.35), psx(new THREE.MeshBasicMaterial({ map: tex, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 }), snap));
+  screen.position.set(0, .3, 1.05); rig.add(screen);
+  const bezel = box(1.96, 1.44, .06, L(0x2a2620), 0, .32, .99); rig.add(bezel);  // dark recess around the glass (front at z 1.02)
+  const pic = new Image(); let picReady = false;
+  pic.onload = () => picReady = true; pic.src = window.AVATAR_SRC || "assets/avatar.jpg";
+  const lines = ["C:\\> RESPEC.EXE", "", "JOSUE KUHIM", "CLASS: BACKEND", "  -> AI/ML ENGINEER", "", "KEEP: PYTHON APIS", "KEEP: DISTRIB SYS", "KEEP: CLOUD INFRA", "", "LEARN: ML ENG", "", "> STUDYING..."];
+  let shown = 0, tScr = 0, channel = 0, staticUntil = 0, osdUntil = 3;
+  function drawStatic(){
+    const img = sx.createImageData(SW, SH), d = img.data;
+    for (let i = 0; i < d.length; i += 4) { const v = Math.random() * 255 | 0; d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255; }
+    sx.putImageData(img, 0, 0);
+  }
+  function drawPicture(t){
+    sx.fillStyle = "#0e1730"; sx.fillRect(0, 0, SW, SH);                       // matches the picture's navy background
+    if (picReady) { const s = SH - 4, flick = Math.sin(t * 60) > .97 ? 1 : 0; sx.drawImage(pic, (SW - s) / 2 + flick, 2, s, s); }
+    const band = (t * 40) % (SH + 30) - 15;                                    // slow rolling bright band
+    sx.fillStyle = "rgba(255,255,255,.05)"; sx.fillRect(0, band, SW, 10);
+  }
+  function drawTerminal(t){
+    sx.fillStyle = "#051208"; sx.fillRect(0, 0, SW, SH);
+    sx.save(); sx.scale(SW / 128, SH / 96);
+    sx.font = "8px monospace"; sx.textBaseline = "top";
+    const vis = lines.slice(Math.max(0, shown - 10), shown);
+    vis.forEach((l, i) => { sx.fillStyle = l.startsWith("JOSUE") ? "#e0ffe9" : "#7dffa8"; sx.fillText(l, 6, 6 + i * 8.5); });
+    if ((t * 2 | 0) % 2) { sx.fillStyle = "#7dffa8"; sx.fillRect(6 + (vis.length ? Math.min(vis[vis.length - 1].length, 18) * 4.8 : 0), 6 + Math.max(vis.length - 1, 0) * 8.5, 5, 7); }
+    sx.restore();
+  }
+  function drawScreen(t){
+    if (t < staticUntil) drawStatic();
+    else {
+      channel === 0 ? drawPicture(t) : drawTerminal(t);
+      if (t < osdUntil) {                                                       // TV on-screen display
+        sx.font = "bold 10px monospace"; sx.textBaseline = "top"; sx.fillStyle = "#7dffa8";
+        sx.fillText(channel === 0 ? "CH 01  JOSUE.JPG" : "CH 02  TERMINAL", 6, 5);
+        sx.fillText("CLICK TO SWITCH ▸", 6, SH - 15);
+      }
+    }
+    for (let y = 0; y < SH; y += 2) { sx.fillStyle = "rgba(0,0,0,.22)"; sx.fillRect(0, y, SW, 1); }
+    tex.needsUpdate = true;
+  }
+  function switchChannel(){
+    const t = performance.now() / 1000;
+    channel ^= 1; staticUntil = t + .35; osdUntil = t + 2.6; shown = 0; tScr = t;
+    blip(220, .12, "sawtooth"); setTimeout(() => blip(660, .05), 350);
+  }
+
+  // keyboard + mouse
+  rig.add(box(2.6, .14, .9, beige, 0, -.92, 1.75));
+  const keyM = beige2; for (let r = 0; r < 4; r++) for (let c = 0; c < 13; c++) rig.add(box(.15, .06, .15, keyM, -1.08 + c * .18, -.83, 1.45 + r * .19));
+  rig.add(box(.28, .1, .42, beige, 1.75, -.94, 1.7));
+
+
+  // lights
+  scene.add(new THREE.AmbientLight(0x4a3a2e, 1));
+  const warm = new THREE.PointLight(0xffb36b, .95, 22); warm.position.set(5, 4, 5); scene.add(warm);
+  const teal = new THREE.PointLight(0x4a8c7f, 1.6, 14); teal.position.set(-4, 1, -2); scene.add(teal);
+  const glow = new THREE.PointLight(0x7dffa8, .7, 5); glow.position.set(0, .3, 1.8); scene.add(glow);
+
+  let lookY = .1;
+  function size(){
+    const w = cv.clientWidth, h = cv.clientHeight; R.setSize(Math.max(1, w / PIX | 0), Math.max(1, h / PIX | 0), false);
+    cam.aspect = w / h; cam.updateProjectionMatrix(); snap.value = (h / PIX) / 2.2;
+    const wide = w > 900; world.position.x = wide ? 3.1 : 0; cam.position.set(0, wide ? 1.4 : 1.2, wide ? 8.4 : 10.5);
+    lookY = wide ? .1 : -2.15;                        // on phones, frame the computer in the top of the hero, above the text
+    $("#fps").textContent = `${w / PIX | 0}×${h / PIX | 0} · PSX MODE`;
+  }
+  size(); addEventListener("resize", size);
+
+  // drag to rotate · click the monitor screen to change channel
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  const overScreen = e => { const b = cv.getBoundingClientRect(); ndc.set((e.clientX - b.left) / b.width * 2 - 1, -((e.clientY - b.top) / b.height) * 2 + 1);
+    ray.setFromCamera(ndc, cam); return ray.intersectObject(screen).length > 0; };
+  let downX = 0, downY = 0;
+  cv.parentElement.addEventListener("pointerdown", e => { if (e.target.closest("a,button")) return; drag = 1; dragX = downX = e.clientX; downY = e.clientY; });
+  addEventListener("pointerup", e => { if (drag && Math.hypot(e.clientX - downX, e.clientY - downY) < 5 && overScreen(e)) switchChannel(); drag = 0; });
+  let rotY = 0, rotV = 0;
+  addEventListener("pointermove", e => {
+    if (drag) { rotV += (e.clientX - dragX) * .0008; dragX = e.clientX; }
+    else if (e.target === cv || e.target === cv.parentElement) cv.parentElement.style.cursor = overScreen(e) ? "pointer" : "";
+  });
+
+  let visible = true, last = 0, acc = 0;
+  new IntersectionObserver(es => visible = es[0].isIntersecting).observe(cv);
+  function loop(now){
+    requestAnimationFrame(loop);
+    if (!visible) return;
+    // 30fps cap for that console feel
+    acc += now - last; last = now; if (acc < 33) return; acc = 0;
+    const t = now / 1000;
+    rotY += rotV; rotV *= .92;
+    rig.rotation.y = (reduced ? 0 : Math.sin(t * .25) * .15) + mx * .2 + rotY - .35;
+    rig.rotation.x = my * .04;
+    led.material.color.setHex((t * 3 | 0) % 2 ? 0x4dff7a : 0x1a5a2a);
+    if (channel === 1) { if (t - tScr > .35 && shown < lines.length) { shown++; tScr = t; } if (shown >= lines.length && t - tScr > 6) { shown = 0; tScr = t; } }
+    drawScreen(t);
+    cam.lookAt(world.position.x * .55, lookY, 0);
+    R.render(scene, cam);
+  }
+  requestAnimationFrame(loop);
+}
+
+/* small rotating soul-gem portrait */
+function gemScene(){
+  const cv = $("#gem"); const R = new THREE.WebGLRenderer({ canvas: cv, antialias: false }); R.setPixelRatio(1); R.setSize(96, 96, false); R.setClearColor(0x000000, 0);
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(40, 1, .1, 20); cam.position.set(0, 0, 5.2);
+  const snap = { value: 40 };
+  const g = new THREE.Group(); scene.add(g);
+  const core = new THREE.Mesh(new THREE.IcosahedronGeometry(1.1, 0), psx(new THREE.MeshPhongMaterial({ color: 0x8e2a22, flatShading: true, shininess: 80, specular: 0xe0b866 }), snap)); g.add(core);
+  const cage = new THREE.Mesh(new THREE.IcosahedronGeometry(1.45, 0), new THREE.MeshBasicMaterial({ color: 0xe0b866, wireframe: true })); g.add(cage);
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.8, .04, 3, 20), psx(new THREE.MeshPhongMaterial({ color: 0x4a8c7f, flatShading: true }), snap)); ring.rotation.x = 1.2; g.add(ring);
+  scene.add(new THREE.AmbientLight(0x554433, 1)); const l = new THREE.PointLight(0xffc27a, 1.6, 20); l.position.set(3, 3, 4); scene.add(l);
+  let vis = false; new IntersectionObserver(es => vis = es[0].isIntersecting).observe(cv);
+  let last = 0;
+  (function loop(now){ requestAnimationFrame(loop); if (!vis || now - last < 40) return; last = now; const t = now / 1000;
+    core.rotation.set(t * .6, t * .9, 0); cage.rotation.set(-t * .3, -t * .5, 0); ring.rotation.z = t * .7; R.render(scene, cam); })(0);
+}
+
+if (window.THREE) { safe(heroScene); } else { $("#scene").style.display = "none"; }
+
+/* ---------- attributes ---------- */
+const attrs = [["AI/ML Engineering ↑", 6, 1], ["Backend / APIs", 9], ["Distributed Systems", 8], ["Cloud Infrastructure", 8], ["Product Engineering", 8]];
+$("#attrs").innerHTML = attrs.map(([n, v, u]) => `<div class="attr"><span>${n.toUpperCase()}</span><span class="pips">${Array.from({ length: 10 }, (_, i) => `<i data-on="${i < v ? 1 : 0}" class="${u ? "u" : ""}"></i>`).join("")}</span><b>${v}/10</b></div>`).join("");
+
+/* ---------- inventory ---------- */
+const items = [
+  ["Python", "Py", "LANGUAGE", "#e0b866", "Main language for backend services, and the language of the ML ecosystem.", "Backend · scripting · ML"],
+  ["FastAPI", "Fa", "BACKEND", "#e0b866", "Async Python framework for fast, typed APIs.", "APIs · model serving"],
+  ["Django", "Dj", "BACKEND", "#e0b866", "Full-featured Python framework for complete web products.", "Web apps · admin · ORM"],
+  ["PostgreSQL", "Pg", "DATA", "#4a8c7f", "Relational database for transactional data.", "Data modeling · SQL"],
+  ["Redis", "Rd", "DATA", "#4a8c7f", "In-memory store for caching, queues and pub/sub.", "Caching · queues"],
+  ["AWS", "Aw", "INFRA", "#8e2a22", "Cloud platform for running and scaling services.", "Cloud infrastructure"],
+  ["Docker", "Dk", "INFRA", "#8e2a22", "Containers for reproducible builds and deployments.", "Packaging · deployment"],
+  ["TypeScript", "Ts", "FRONTEND", "#cfc4a8", "Typed JavaScript for safer frontend and tooling code.", "Frontend · tooling"],
+  ["React", "Re", "FRONTEND", "#cfc4a8", "Component-based UI library.", "User interfaces"],
+  ["Next.js", "Nx", "FRONTEND", "#cfc4a8", "React framework for full-stack web apps.", "Full-stack · SSR"],
+];
+$("#slots").innerHTML = items.map((it, i) => `<button class="slot${i ? "" : " sel"}" data-i="${i}" style="--c:${it[3]}" aria-label="${it[0]}">${it[1]}<small>${it[0]}</small></button>`).join("");
+function showItem(i){
+  const it = items[i]; $$(".slot").forEach(s => s.classList.toggle("sel", +s.dataset.i === i));
+  $("#tipn").textContent = String(i + 1).padStart(2, "0"); $("#tiph").textContent = it[0];
+  $("#tipc").textContent = it[2]; $("#tipc").style.color = it[3]; $("#tipp").textContent = it[4]; $("#tipf").textContent = it[5];
+}
+showItem(0);
+$$(".slot").forEach(s => { const f = () => showItem(+s.dataset.i); s.addEventListener("pointerenter", f); s.addEventListener("focus", f); s.addEventListener("click", () => { f(); blip(740, .06); }); });
+
+
+/* ---------- reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return;
+  e.target.classList.add("in");
+  $$(".pips i", e.target).forEach((p, i) => setTimeout(() => p.dataset.on === "1" && p.classList.add("on"), 300 + (i % 10) * 70));
+  $$(".prog i", e.target).forEach(p => p.style.width = p.dataset.w + "%");
+  io.unobserve(e.target); }), { threshold: .12 });
+$$(".rv").forEach((el, i) => { el.style.animationDelay = (i % 4) * 90 + "ms"; io.observe(el); });
+
+/* ---------- terminal ---------- */
+(function(){
+  const out = $("#out"), inp = $("#cmd"), hist = []; let hi = 0;
+  const esc = s => s.replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  const print = h => { out.insertAdjacentHTML("beforeend", `<div>${h}</div>`); out.scrollTop = out.scrollHeight; };
+  const cmds = {
+    help: () => `<span class="b">AVAILABLE COMMANDS</span>
+  WHOAMI      who is this
+  RESPEC      the backend -&gt; AI/ML transition
+  DIR         list files
+  STACK       core technologies
+  FORJA       featured project
+  INTERESTS   engineering interests
+  STATUS      current state
+  CONTACT     how to reach me
+  HIRE        recommended
+  CLS         clear screen`,
+    whoami: () => `<span class="a">JOSUE KUHIM</span> — Backend Engineer -&gt; <span class="b">AI/ML Engineer</span>
+
+Backend &amp; product engineer moving into AI/ML Engineering.
+Built: scalable APIs, system integrations, distributed
+architectures. Now bringing that into ML systems that ship.`,
+    respec: () => `RESPEC IN PROGRESS...
+<span class="d">KEEP</span>   Python, APIs, distributed systems, cloud infra
+<span class="d">KEEP</span>   production mindset: reliability, observability
+<span class="b">LEARN</span>  AI/ML Engineering
+<span class="a">TARGET</span> production AI systems`,
+    dir: () => ` Volume in drive C is KUHIM
+ Directory of C:\\KUHIM
+
+API      PY        4,096  11-18-26
+INFRA    YML       2,048  11-18-26
+MODELS   &lt;DIR&gt;              11-18-26
+SECRETS  &lt;DIR&gt;              11-18-26
+        4 file(s)  640K free`,
+    stack: () => items.map((it, i) => `<span class="d">[${String(i + 1).padStart(2, "0")}]</span> ${it[0].padEnd(12)} <span class="d">${it[2]}</span>`).join("\n"),
+    interests: () => "* Distributed systems\n* Financial infrastructure\n* Developer tooling\n* AI-powered products\n* Backend architecture",
+    status: () => `* transitioning into AI/ML Engineering\n* <span class="a">open to remote AI/ML &amp; backend roles</span>`,
+    contact: () => `GITHUB    ${esc(CONFIG.github)}\nLINKEDIN  ${esc(CONFIG.linkedin)}` + (CONFIG.email ? `\nEMAIL     ${esc(CONFIG.email)}` : ""),
+    hire: () => { setTimeout(() => $("#contact").scrollIntoView({ behavior: "smooth" }), 1100);
+      return `Checking candidate.....
+[OK] writes tests
+[OK] reads docs
+[OK] ships to production
+<span class="b">ACCESS GRANTED.</span> Loading save screen...`; },
+    "cd secrets": () => "Access denied.",
+    forja: () => `<span class="b">FORJA</span> — code-review LLM for Portuguese
+data -&gt; post-training -&gt; evals -&gt; serving -&gt; GitHub App
+<span class="d">REAL BUGS</span>  9 -&gt; <span class="a">27</span> of 199
+<span class="d">PRECISION</span>  3% -&gt; <span class="a">23%</span>
+github.com/josuekuhim/forja`,
+    "cd models": () => "Qwen2.5-Coder 0.5B + LoRA. Type FORJA.",
+    ver: () => "KUHIM-DOS Version 6.22",
+    cls: () => { out.innerHTML = ""; return null; },
+    exit: () => "There is no exit. Try HIRE.",
+  };
+  cmds.clear = cmds.cls; cmds.ls = cmds.dir;
+  print(`<span class="d">KUHIM-DOS 6.22 · 640K OK</span>\nType <span class="b">HELP</span> for commands.\n`);
+  const run = raw => { const c = raw.trim(); if (!c) return;
+    print(`C:\\KUHIM&gt;${esc(c)}`); hist.push(c); hi = hist.length; blip(1200, .02);
+    const f = cmds[c.toLowerCase()]; if (f) { const r = f(); if (r) print(r + "\n"); }
+    else print(`Bad command or file name: ${esc(c)}\n`); };
+  inp.addEventListener("keydown", e => {
+    if (e.key === "Enter") { run(inp.value); inp.value = ""; }
+    else if (e.key === "ArrowUp") { if (hi > 0) inp.value = hist[--hi]; e.preventDefault(); }
+    else if (e.key === "ArrowDown") { inp.value = hi < hist.length - 1 ? hist[++hi] : (hi = hist.length, ""); e.preventDefault(); }
+    else if (e.key === "Tab") { e.preventDefault(); const m = Object.keys(cmds).find(k => k.startsWith(inp.value.toLowerCase())); if (m) inp.value = m.toUpperCase(); }
+  });
+  $("#screen").addEventListener("click", () => inp.focus({ preventScroll: true }));
+  ["HELP", "WHOAMI", "FORJA", "STACK", "HIRE"].forEach(c => { const b = document.createElement("button"); b.textContent = c; b.onclick = () => run(c); $("#chips").appendChild(b); });
+})();
+
+/* ---------- visits (this browser) ---------- */
+(function(){ const n = (+safe(() => localStorage.getItem("jk_save")) || 0) + 1; safe(() => localStorage.setItem("jk_save", n)); $("#vc").textContent = String(n).padStart(2, "0"); })();
+</script>
+</body>
+</html>
