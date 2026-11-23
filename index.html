@@ -146,6 +146,18 @@ section{position:relative;padding:120px 18px}
 .attr .pips i.on.u{background:var(--verd);border-color:#7cc3b5}
 .attr b{color:var(--brass2);font-weight:400;text-align:right}
 
+/* recruiter path */
+.tnav{display:flex;gap:4px}
+.tnav a{color:var(--cream);text-decoration:none;padding:2px 10px;border:1px solid transparent}
+.tnav a:hover{color:var(--brass2);border-color:var(--line)}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.cta-row a{font-family:VT323;font-size:21px;letter-spacing:.12em;text-decoration:none;color:var(--cream);border:1px solid var(--line);padding:4px 14px;background:rgba(20,17,15,.6)}
+.cta-row a.pri{color:var(--bg);background:var(--brass2);border-color:var(--brass2)}
+.cta-row a:hover{border-color:var(--brass2)}
+.ints-line{margin-top:22px;font-family:VT323;font-size:19px!important;letter-spacing:.04em;color:var(--paper)!important;line-height:1.3!important}
+.ints-line span{color:var(--muted);letter-spacing:.12em;margin-right:8px}
+section[id]{scroll-margin-top:40px}
+
 /* projects */
 .proj{padding:30px 32px 32px}
 .proj .hd{font-family:VT323;font-size:19px;letter-spacing:.25em;color:var(--brass);display:flex;justify-content:space-between;gap:12px;margin-bottom:18px}
@@ -278,6 +290,7 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
   .hero::before{background:linear-gradient(0deg,rgba(20,17,15,.96) 30%,rgba(20,17,15,.4) 70%,transparent)}
   .hero-ui{justify-content:flex-end;padding-bottom:70px}
   .menu{display:none}
+  .tnav{display:none}
   .dossier,.inv-wrap{grid-template-columns:1fr}
   .tree{grid-template-columns:1fr;gap:34px}.tree::before{display:none}
   .bridge{grid-template-columns:1fr;gap:6px}
@@ -310,6 +323,7 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
 
 <header class="top">
   <div class="mark"><i></i>JK · VOL.1</div>
+  <nav class="tnav" aria-label="Sections"><a href="#projects">PROJECTS</a><a href="#dossier">ABOUT</a><a href="#abilities">SKILLS</a><a href="#contact">CONTACT</a></nav>
   <div class="r"><a class="gamelink" href="game.html">PLAY THE GAME ↗</a><button id="snd">SOUND: OFF</button><span id="clock">--:--</span></div>
 </header>
 
@@ -321,61 +335,23 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
     <h1>Josué<br>Kuhim<span class="new">RESPEC</span></h1>
     <p class="cls respec"><span class="from">Backend Engineer</span><span class="arrow">→</span><span class="to">AI/ML Engineer</span></p>
     <p class="tags">Bringing production backend experience — scalable APIs, distributed systems, cloud infrastructure — into AI/ML engineering.</p>
+    <div class="cta-row"><a class="pri" href="#projects">SEE THE PROJECT ▼</a><a href="https://github.com/josuekuhim" target="_blank" rel="noopener">GITHUB ↗</a><a href="#contact">CONTACT</a></div>
     <ul class="menu">
-      <li><a href="#dossier"><span class="cur"></span>About<span class="no">01</span></a></li>
-      <li><a href="#skilltree"><span class="cur"></span>Career Path<span class="no">02</span></a></li>
-      <li><a href="#projects"><span class="cur"></span>Projects<span class="no">03</span></a></li>
-      <li><a href="#abilities"><span class="cur"></span>Skills &amp; Stack<span class="no">04</span></a></li>
-      <li><a href="#objectives"><span class="cur"></span>Interests<span class="no">05</span></a></li>
-      <li><a href="#terminal"><span class="cur"></span>Terminal<span class="no">06</span></a></li>
-      <li><a href="#contact"><span class="cur"></span>Contact<span class="no">07</span></a></li>
+      <li><a href="#projects"><span class="cur"></span>Projects<span class="no">01</span></a></li>
+      <li><a href="#dossier"><span class="cur"></span>About<span class="no">02</span></a></li>
+      <li><a href="#abilities"><span class="cur"></span>Skills &amp; Stack<span class="no">03</span></a></li>
+      <li><a href="#skilltree"><span class="cur"></span>Career Path<span class="no">04</span></a></li>
+      <li><a href="#contact"><span class="cur"></span>Contact<span class="no">05</span></a></li>
       <li class="alt"><a href="game.html"><span class="cur"></span>Play the game version<span class="no">~5 MIN ↗</span></a></li>
     </ul>
   </div>
-  <div class="prompts"><span><kbd>SCROLL</kbd>CONTINUE</span><span><kbd>CLICK</kbd>THE SCREEN TO CHANGE CHANNEL</span><span><kbd>DRAG</kbd>ROTATE THE COMPUTER</span></div>
+  <div class="prompts"><span><kbd>SCROLL</kbd>TO THE PROJECT</span></div>
   <div class="fps" id="fps">320×240 · 30FPS</div>
-</section>
-
-<section id="dossier">
-  <div class="wrap">
-    <div class="sh rv"><div class="k">01</div><h2>About</h2><div class="orn"><i></i><i></i><i></i></div></div>
-    <div class="dossier">
-      <div class="frame portrait rv">
-        <div class="plate">Josué Kuhim</div>
-        <div class="sub">BACKEND → AI/ML ENGINEERING</div>
-      </div>
-      <div class="frame bio rv">
-        <p class="lead">“Most ML never makes it out of the notebook. I come from the side that makes systems run in production.”</p>
-        <p>I'm a backend &amp; product engineer moving into <strong style="color:#9fe0d2;font-weight:400">AI/ML Engineering</strong>. I've been building reliable backend systems and end-to-end products: scalable APIs, system integrations and distributed architectures. Now I'm taking that foundation into machine learning, where models need the same things backends do: solid infrastructure, clean interfaces, and to actually ship.</p>
-        <div class="stats">
-          <div class="stat"><span>FROM</span><span>Backend &amp; Product</span></div>
-          <div class="stat"><span>TO</span><span style="color:#9fe0d2">AI/ML Engineering</span></div>
-          <div class="stat"><span>MAIN WEAPON</span><span>Python</span></div>
-          <div class="stat"><span>STATUS</span><span class="ok">Open to remote</span></div>
-        </div>
-        <div class="attrs" id="attrs"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skilltree">
-  <div class="wrap">
-    <div class="sh rv"><div class="k">02</div><h2>Career Path</h2><div class="orn"><i></i><i></i><i></i></div></div>
-    <!-- edit the nodes to match your real progress -->
-    <div class="tree">
-      <div class="node done rv"><div class="gem"><span>1</span></div><div class="st">EXPERIENCE</div><h3>Backend &amp; APIs</h3><p>Python, FastAPI, Django. Scalable APIs and system integrations.</p></div>
-      <div class="node done rv"><div class="gem"><span>2</span></div><div class="st">EXPERIENCE</div><h3>Distributed Systems &amp; Cloud</h3><p>Distributed architectures, PostgreSQL, Redis, AWS, Docker.</p></div>
-      <div class="node now rv"><div class="gem"><span>3</span></div><div class="st">IN PROGRESS</div><h3>AI/ML Engineering</h3><p>Built Forja: data, post-training, evals and serving for a code-review LLM, end to end.</p></div>
-      <div class="node goal rv"><div class="gem"><span>4</span></div><div class="st">GOAL</div><h3>Production AI Systems</h3><p>Where the two meet: ML that ships, scales and stays reliable.</p></div>
-    </div>
-    <div class="frame bridge rv"><span class="q">“</span><p>The hard part of AI in production is often not the model, but everything around it: <b>APIs, data pipelines, infrastructure, reliability</b>. That's the part I already know. Now I'm learning the rest.</p></div>
-  </div>
 </section>
 
 <section id="projects">
   <div class="wrap">
-    <div class="sh rv"><div class="k">03</div><h2>Projects</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="sh rv"><div class="k">01</div><h2>Projects</h2><div class="orn"><i></i><i></i><i></i></div></div>
     <article class="frame proj rv">
       <div class="hd"><span>FEATURED BUILD</span><span class="done">● SHIPPED · 7 REPOS</span></div>
       <div class="proj-top">
@@ -414,9 +390,33 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
   </div>
 </section>
 
+<section id="dossier">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">02</div><h2>About</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="dossier">
+      <div class="frame portrait rv">
+        <div class="plate">Josué Kuhim</div>
+        <div class="sub">BACKEND → AI/ML ENGINEERING</div>
+      </div>
+      <div class="frame bio rv">
+        <p class="lead">“Most ML never makes it out of the notebook. I come from the side that makes systems run in production.”</p>
+        <p>I'm a backend &amp; product engineer moving into <strong style="color:#9fe0d2;font-weight:400">AI/ML Engineering</strong>. I've been building reliable backend systems and end-to-end products: scalable APIs, system integrations and distributed architectures. Now I'm taking that foundation into machine learning, where models need the same things backends do: solid infrastructure, clean interfaces, and to actually ship.</p>
+        <div class="stats">
+          <div class="stat"><span>FROM</span><span>Backend &amp; Product</span></div>
+          <div class="stat"><span>TO</span><span style="color:#9fe0d2">AI/ML Engineering</span></div>
+          <div class="stat"><span>MAIN WEAPON</span><span>Python</span></div>
+          <div class="stat"><span>STATUS</span><span class="ok">Open to remote</span></div>
+        </div>
+        <div class="attrs" id="attrs"></div>
+        <p class="ints-line"><span>INTERESTS</span> AI-powered products · distributed systems · financial infrastructure · developer tooling · backend architecture</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="abilities">
   <div class="wrap">
-    <div class="sh rv"><div class="k">04</div><h2>Skills &amp; Stack</h2><div class="orn"><i></i><i></i><i></i></div><p class="hintline" style="margin-top:14px">backend skills that carry over to ML engineering</p></div>
+    <div class="sh rv"><div class="k">03</div><h2>Skills &amp; Stack</h2><div class="orn"><i></i><i></i><i></i></div><p class="hintline" style="margin-top:14px">backend skills that carry over to ML engineering</p></div>
     <div class="abil">
       <div class="frame ab rv" data-k="1">
         <div class="ico"><svg viewBox="0 0 48 48" fill="none" stroke="#e0b866" stroke-width="2.5"><path d="M24 4 L42 14 L42 34 L24 44 L6 34 L6 14Z"/><path d="M27 12 L17 26 L24 26 L21 37 L31 22 L24 22Z" fill="#e0b866"/></svg></div>
@@ -452,42 +452,23 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
   </div>
 </section>
 
-<section id="objectives">
+<section id="skilltree">
   <div class="wrap">
-    <div class="sh rv"><div class="k">05</div><h2>Interests</h2><div class="orn"><i></i><i></i><i></i></div></div>
-    <div class="frame obj rv">
-      <div class="hd"><span>CURRENT GOAL</span><span>IN PROGRESS</span></div>
-      <div class="q side"><span class="box"></span><div><h3>Become an AI/ML Engineer</h3><p>Combine the backend foundation with machine learning to build AI systems that work in production.</p></div><span class="tag">GOAL</span></div>
-      <div class="hd" style="margin-top:26px"><span>WHERE I WANT TO APPLY IT</span><span>INTERESTS</span></div>
-      <div class="q"><span class="box"></span><div><h3>AI-Powered Products</h3><p>Models inside software people actually use.</p></div><span class="tag">AI/ML</span></div>
-      <div class="q"><span class="box"></span><div><h3>Distributed Systems</h3><p>Make many machines (and many models) behave like one reliable system.</p></div><span class="tag">CORE</span></div>
-      <div class="q"><span class="box"></span><div><h3>Financial Infrastructure</h3><p>Systems where correctness is non-negotiable, and a natural home for ML.</p></div><span class="tag">DOMAIN</span></div>
-      <div class="q"><span class="box"></span><div><h3>Developer Tooling</h3><p>Tools that remove friction, increasingly powered by AI.</p></div><span class="tag">DOMAIN</span></div>
-      <div class="q"><span class="box"></span><div><h3>Backend Architecture</h3><p>Systems that stay clean as traffic, product and models grow.</p></div><span class="tag">CORE</span></div>
+    <div class="sh rv"><div class="k">04</div><h2>Career Path</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <!-- edit the nodes to match your real progress -->
+    <div class="tree">
+      <div class="node done rv"><div class="gem"><span>1</span></div><div class="st">EXPERIENCE</div><h3>Backend &amp; APIs</h3><p>Python, FastAPI, Django. Scalable APIs and system integrations.</p></div>
+      <div class="node done rv"><div class="gem"><span>2</span></div><div class="st">EXPERIENCE</div><h3>Distributed Systems &amp; Cloud</h3><p>Distributed architectures, PostgreSQL, Redis, AWS, Docker.</p></div>
+      <div class="node now rv"><div class="gem"><span>3</span></div><div class="st">IN PROGRESS</div><h3>AI/ML Engineering</h3><p>Built Forja: data, post-training, evals and serving for a code-review LLM, end to end.</p></div>
+      <div class="node goal rv"><div class="gem"><span>4</span></div><div class="st">GOAL</div><h3>Production AI Systems</h3><p>Where the two meet: ML that ships, scales and stays reliable.</p></div>
     </div>
-  </div>
-</section>
-
-<section id="terminal">
-  <div class="wrap">
-    <div class="sh rv"><div class="k">06</div><h2>Terminal</h2><div class="orn"><i></i><i></i><i></i></div></div>
-    <div class="pc rv">
-      <div class="bezel">
-        <div class="screen" id="screen">
-          <div class="out" id="out"></div>
-          <div class="inl"><span>C:\KUHIM&gt;</span><input id="cmd" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>
-        </div>
-        <div class="bot"><span>KUHIM · 486DX</span><span class="vents"><i></i><i></i><i></i><i></i></span><span class="led"></span></div>
-      </div>
-      <div class="neck"></div><div class="base"></div>
-    </div>
-    <div class="chips" id="chips"></div>
+    <div class="frame bridge rv"><span class="q">“</span><p>The hard part of AI in production is often not the model, but everything around it: <b>APIs, data pipelines, infrastructure, reliability</b>. That's the part I already know. Now I'm learning the rest.</p></div>
   </div>
 </section>
 
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="sh rv"><div class="k">07</div><h2>Contact</h2><div class="orn"><i></i><i></i><i></i></div></div>
+    <div class="sh rv"><div class="k">05</div><h2>Contact</h2><div class="orn"><i></i><i></i><i></i></div></div>
     <p class="big rv">Looking for <em>AI/ML</em> roles, remote.</p>
     <p class="hintline rv" style="margin:-24px auto 44px;max-width:620px">Open to remote opportunities in AI/ML engineering, and to backend roles that move in that direction.</p>
     <div class="frame save rv">
@@ -499,6 +480,23 @@ footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
         <a id="li" href="#" target="_blank" rel="noopener"><span class="cur"></span>LinkedIn<span class="r">↗</span></a>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="terminal">
+  <div class="wrap">
+    <div class="sh rv"><div class="k">BONUS</div><h2>Terminal</h2><div class="orn"><i></i><i></i><i></i></div><p class="hintline" style="margin-top:14px">for the curious: type HELP, or try FORJA</p></div>
+    <div class="pc rv">
+      <div class="bezel">
+        <div class="screen" id="screen">
+          <div class="out" id="out"></div>
+          <div class="inl"><span>C:\KUHIM&gt;</span><input id="cmd" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>
+        </div>
+        <div class="bot"><span>KUHIM · 486DX</span><span class="vents"><i></i><i></i><i></i><i></i></span><span class="led"></span></div>
+      </div>
+      <div class="neck"></div><div class="base"></div>
+    </div>
+    <div class="chips" id="chips"></div>
   </div>
 </section>
 </main>
@@ -546,7 +544,7 @@ document.addEventListener("pointerover", e => { if (e.target.closest(".menu a,.o
 (function(){
   const el = $("#boot"); const done = () => { if (el.classList.contains("gone")) return; el.classList.add("gone"); blip(523, .12, "triangle"); safe(() => sessionStorage.setItem("boot", 1)); };
   if (reduced || safe(() => sessionStorage.getItem("boot"))) { el.classList.add("gone"); return; }
-  setTimeout(done, 2400); addEventListener("keydown", done, { once: true }); el.addEventListener("pointerdown", done);
+  setTimeout(done, 900); addEventListener("keydown", done, { once: true }); el.addEventListener("pointerdown", done);
 })();
 
 /* ---------- PSX 3D hero ---------- */
